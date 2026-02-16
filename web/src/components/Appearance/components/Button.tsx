@@ -8,27 +8,32 @@ interface ButtonProps {
   onClick: () => void;
 }
 
+/* rm-billing Pay button style: small, colored, radius sm */
 const CustomButton = styled.span<ButtonProps>`
-  padding: 5px 12px;
+  padding: 6px 12px;
   margin: ${props => props?.margin || "0px"};
   width: ${props => props?.width || "auto"};
-  color: #C2F4F9;
-  background-color: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.15);
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #228be6;
+  border: none;
   text-align: center;
-  border-radius: ${props => props.theme.borderRadius || "4px"};
+  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  font-weight: 400;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   
   &:hover {
-    background-color: rgba(194, 244, 249, 0.15);
-    border-color: rgba(194, 244, 249, 0.4);
+    background-color: #339af0;
+  }
+  
+  &:active {
+    transform: scale(0.98);
   }
 `;
 

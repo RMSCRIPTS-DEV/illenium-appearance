@@ -21,22 +21,22 @@ const Container = styled.div`
 
 const Label = styled.label`
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #909296;
   font-weight: 500;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.15);
+  background-color: #25262b;
+  border: 1px solid #373A40;
   border-radius: 6px;
   overflow: hidden;
   transition: all 0.15s ease;
   
   &:hover {
-    background-color: rgba(194, 244, 249, 0.15);
-    border-color: rgba(194, 244, 249, 0.4);
+    background-color: #2C2E33;
+    border-color: #5c5f66;
   }
 `;
 
@@ -54,15 +54,15 @@ const Button = styled.button`
   svg {
     width: 12px;
     height: 12px;
-    color: rgba(194, 244, 249, 0.5);
+    color: #5c5f66;
     transition: color 0.2s ease;
   }
   
   &:hover {
-    background: rgba(194, 244, 249, 0.15);
+    background: rgba(34, 139, 230, 0.15);
     
     svg {
-      color: #C2F4F9;
+      color: #228be6;
     }
   }
   
@@ -74,7 +74,7 @@ const Button = styled.button`
       background: transparent;
       
       svg {
-        color: rgba(194, 244, 249, 0.5);
+        color: #5c5f66;
       }
     }
   }
@@ -84,7 +84,7 @@ const Value = styled.span`
   flex: 1;
   text-align: center;
   font-size: 12px;
-  color: #ffffff;
+  color: #C1C2C5;
   font-weight: 500;
   min-width: 50px;
 `;

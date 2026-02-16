@@ -1,6 +1,20 @@
 Config.Theme = {
-    currentTheme = "qb-core",
+    currentTheme = "illenium",
     themes = {
+        {
+            id = "illenium",
+            borderRadius = "4px",
+            fontColor = "193, 194, 197",
+            fontColorHover = "193, 194, 197",
+            fontColorSelected = "0, 0, 0",
+            fontFamily = "Nexa-Book",
+            primaryBackground = "26, 27, 30",
+            primaryBackgroundSelected = "55, 58, 64",
+            secondaryBackground = "16, 17, 19",
+            scaleOnHover = false,
+            sectionFontWeight = "normal",
+            smoothBackgroundTransition = false
+        },
         {
             id = "default",
             borderRadius = "4px",

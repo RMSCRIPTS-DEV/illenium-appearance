@@ -79,7 +79,8 @@ server_scripts {
 files {
     'web/dist/index.html',
     'web/dist/assets/*.js',
-    'web/dist/assets/*.css'
+    'web/dist/assets/*.css',
+    'web/dist/assets/*.ttf'
 }
 
 ui_page 'web/dist/index.html'

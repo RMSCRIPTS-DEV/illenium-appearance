@@ -10,7 +10,7 @@ interface ItemProps {
 
 const Container = styled.div`
   width: 100%;
-  border-bottom: 1px solid rgba(194, 244, 249, 0.1);
+  border-bottom: 1px solid #2C2E33;
 `;
 
 interface HeaderProps {
@@ -27,22 +27,25 @@ const Header = styled.button<HeaderProps>`
   border: none;
   cursor: pointer;
   transition: background 0.2s ease;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   
   &:hover {
-    background: rgba(194, 244, 249, 0.08);
+    background: #25262b;
+    
+    span { color: #228be6; }
+    svg { color: #339af0; }
   }
   
   span {
     font-size: 12px;
     font-weight: 500;
-    color: #ffffff;
+    color: #C1C2C5;
   }
   
   svg {
     width: 14px;
     height: 14px;
-    color: #C2F4F9;
+    color: #228be6;
     transition: transform 0.25s ease;
     transform: ${({ expanded }) => expanded ? 'rotate(180deg)' : 'rotate(0)'};
   }

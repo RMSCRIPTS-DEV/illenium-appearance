@@ -11,48 +11,60 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   user-select: none;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(16, 17, 19, 0.85);
   z-index: 1000;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
 
   p {
     font-size: 18px;
     font-weight: 600;
-    color: #ffffff;
+    color: #C1C2C5;
     margin-bottom: 8px;
-    font-family: 'Bai Jamjuree', sans-serif;
+    font-family: 'Nexa-Book', sans-serif;
   }
 
   span {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.5);
+    color: #909296;
     margin-bottom: 28px;
-    font-family: 'Bai Jamjuree', sans-serif;
+    font-family: 'Nexa-Book', sans-serif;
   }
 `;
 
+/* rm-billing modal style: Create=blue filled, Cancel=light */
 export const Buttons = styled.div`
   display: flex;
   gap: 12px;
 
   button {
-    min-width: 120px;
-    padding: 12px 24px;
-    border-radius: 6px;
+    min-width: 100px;
+    padding: 8px 16px;
+    border-radius: 4px;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
-    font-family: 'Bai Jamjuree', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    background-color: rgba(56, 79, 82, 0.31);
-    border: 1px solid rgba(194, 244, 249, 0.15);
-    color: #C2F4F9;
+    transition: all 0.2s ease;
+    font-family: 'Nexa-Book', sans-serif;
 
-    &:hover {
-      background-color: rgba(194, 244, 249, 0.15);
-      border-color: rgba(194, 244, 249, 0.4);
+    &:last-child {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #C1C2C5;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+    
+    &:first-child {
+      background-color: #228be6;
+      border: none;
+      color: #ffffff;
+      
+      &:hover {
+        background-color: #339af0;
+      }
     }
     
     &:active {

@@ -7,7 +7,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid rgba(194, 244, 249, 0.15);
+  border-bottom: 1px solid #2C2E33;
 `;
 
 const HeaderIcon = styled.div`
@@ -16,12 +16,12 @@ const HeaderIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.15);
+  background-color: #25262b;
+  border: 1px solid #373A40;
   border-radius: 8px;
   
   svg {
-    color: #C2F4F9;
+    color: #228be6;
     width: 20px;
     height: 20px;
   }
@@ -29,21 +29,21 @@ const HeaderIcon = styled.div`
 
 const HeaderText = styled.div`
   flex: 1;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   
   h1 {
     font-size: 14px;
     font-weight: 600;
-    color: #ffffff;
+    color: #C1C2C5;
     margin: 0 0 2px 0;
-    font-family: 'Bai Jamjuree', sans-serif;
+    font-family: 'Nexa-Book', sans-serif;
   }
   
   p {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
+    color: #909296;
     margin: 0;
-    font-family: 'Bai Jamjuree', sans-serif;
+    font-family: 'Nexa-Book', sans-serif;
   }
 `;
 

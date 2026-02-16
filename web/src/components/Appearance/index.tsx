@@ -25,6 +25,7 @@ import {
   CAMERA_INITIAL_STATE,
   ROTATE_INITIAL_STATE,
   CLOTHES_INITIAL_STATE,
+  DEV_APPEARANCE_EXAMPLE,
 } from './settings';
 
 import Ped from './Ped';
@@ -101,13 +102,16 @@ if (isDev) {
     },
   }));
 
-  // This mock returns BOTH config and appearanceData
+  // This mock returns BOTH config and appearanceData (with example clothing in dev)
   mock('appearance_get_data', () => ({
     config: DEV_CONFIG,
-    appearanceData: { ...APPEARANCE_INITIAL_STATE, model: 'mp_f_freemode_01' },
+    appearanceData: DEV_APPEARANCE_EXAMPLE,
   }));
 
-  mock('appearance_change_model', () => SETTINGS_INITIAL_STATE);
+  mock('appearance_change_model', (model: string) => ({
+    appearanceSettings: SETTINGS_INITIAL_STATE,
+    appearanceData: { ...DEV_APPEARANCE_EXAMPLE, model },
+  }));
   mock('appearance_change_component', () => SETTINGS_INITIAL_STATE.components);
   mock('appearance_change_prop', () => SETTINGS_INITIAL_STATE.props);
   mock('appearance_set_camera', () => 1);
@@ -117,13 +121,13 @@ if (isDev) {
     themes: [{
       id: 'default',
       borderRadius: '6px',
-      fontColor: '232, 234, 237',
-      fontColorHover: '255, 255, 255',
-      fontColorSelected: '20, 25, 32',
-      fontFamily: 'Bai Jamjuree',
-      primaryBackground: '30, 38, 50',
-      primaryBackgroundSelected: '126, 184, 218',
-      secondaryBackground: '20, 25, 32',
+      fontColor: '193, 194, 197',
+      fontColorHover: '193, 194, 197',
+      fontColorSelected: '0, 0, 0',
+      fontFamily: 'Nexa-Book',
+      primaryBackground: '26, 27, 30',
+      primaryBackgroundSelected: '55, 58, 64',
+      secondaryBackground: '16, 17, 19',
       scaleOnHover: false,
       sectionFontWeight: '500',
       smoothBackgroundTransition: true,
@@ -138,10 +142,10 @@ const Appearance = () => {
   );
 
   const [data, setData] = useState<PedAppearance | undefined>(
-    isDev ? { ...APPEARANCE_INITIAL_STATE, model: 'mp_f_freemode_01' } : undefined
+    isDev ? DEV_APPEARANCE_EXAMPLE : undefined
   );
   const [storedData, setStoredData] = useState<PedAppearance | undefined>(
-    isDev ? { ...APPEARANCE_INITIAL_STATE, model: 'mp_f_freemode_01' } : undefined
+    isDev ? DEV_APPEARANCE_EXAMPLE : undefined
   );
   const [appearanceSettings, setAppearanceSettings] = useState<AppearanceSettings | undefined>(
     isDev ? SETTINGS_INITIAL_STATE : undefined
@@ -655,9 +659,11 @@ const Appearance = () => {
 
   const fetchData = useCallback(async () => {
     const result = await Nui.post('appearance_get_data');
-    setConfig(result.config);
-    setStoredData(result.appearanceData);
-    setData(result.appearanceData); 
+    if (result?.config && result?.appearanceData) {
+      setConfig(result.config);
+      setStoredData(result.appearanceData);
+      setData(result.appearanceData);
+    }
   }, []);
 
   const fetchSettings = useCallback(async () => {

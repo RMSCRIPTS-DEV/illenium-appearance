@@ -35,65 +35,66 @@ const customStyles: any = {
   control: (styles: any) => ({
     ...styles,
     marginTop: '10px',
-    background: 'rgba(23, 23, 23, 0.8)',
+    background: '#1A1B1E',
     fontSize: '14px',
-    color: '#fff',
-    border: 'none',
+    color: '#C1C2C5',
+    border: '1px solid #2C2E33',
     outline: 'none',
     boxShadow: 'none',
   }),
   placeholder: (styles: any) => ({
     ...styles,
     fontSize: '14px',
-    color: '#fff',
+    color: '#5c5f66',
   }),
   input: (styles: any) => ({
     ...styles,
     fontSize: '14px',
-    color: '#fff',
+    color: '#C1C2C5',
   }),
   singleValue: (styles: any) => ({
     ...styles,
     fontSize: '14px',
-    color: '#fff',
+    color: '#C1C2C5',
     border: 'none',
     outline: 'none',
   }),
   indicatorContainer: (styles: any) => ({
     ...styles,
-    borderColor: '#fff',
-    color: '#fff',
+    borderColor: '#373A40',
+    color: '#228be6',
   }),
   dropdownIndicator: (styles: any) => ({
     ...styles,
-    borderColor: '#fff',
-    color: '#fff',
+    borderColor: '#373A40',
+    color: '#228be6',
   }),
   menuPortal: (styles: any) => ({
     ...styles,
-    color: '#fff',
+    color: '#C1C2C5',
     zIndex: 9999,
   }),
   menu: (styles: any) => ({
     ...styles,
-    background: 'rgba(23, 23, 23, 0.8)',
+    background: '#1A1B1E',
     position: 'absolute',
     marginBottom: '10px',
     borderRadius: '4px',
+    border: '1px solid #2C2E33',
   }),
   menuList: (styles: any) => ({
     ...styles,
-    background: 'rgba(23, 23, 23, 0.8)',
+    background: '#1A1B1E',
     borderRadius: '4px',
     '&::-webkit-scrollbar': {
-      width: '10px',
+      width: '4px',
     },
     '&::-webkit-scrollbar-track': {
-      background: 'none',
+      background: '#101113',
     },
     '&::-webkit-scrollbar-thumb': {
       borderRadius: '4px',
-      background: '#fff',
+      background: '#373A40',
     },
   }),
   option: (styles: any, { isFocused, isSelected }: any) => ({
@@ -102,9 +103,9 @@ const customStyles: any = {
     width: '97%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: isSelected ? 'rgba(194, 244, 249, 0.2)' : isFocused ? 'rgba(194, 244, 249, 0.12)' : 'transparent',
-    color: isSelected ? '#C2F4F9' : '#ffffff',
-    fontFamily: 'Bai Jamjuree, sans-serif',
+    backgroundColor: isSelected ? 'rgba(34, 139, 230, 0.15)' : isFocused ? 'rgba(34, 139, 230, 0.08)' : 'transparent',
+    color: isSelected ? '#228be6' : isFocused ? '#228be6' : '#A6A7AB',
+    fontFamily: 'Nexa-Book, sans-serif',
   }),
 };
 
@@ -179,10 +180,10 @@ const SelectTattoo = ({
   }
 
   const themeContext = useContext(ThemeContext);
-  // Override with theme colors but keep ox_lib styling
-  customStyles.control.backgroundColor = `rgba(${themeContext.secondaryBackground || '18, 26, 28'}, 0.95)`;
-  customStyles.menu.backgroundColor = `rgba(${themeContext.secondaryBackground || '18, 26, 28'}, 0.95)`;
-  customStyles.menuList.backgroundColor = `rgba(${themeContext.secondaryBackground || '18, 26, 28'}, 0.95)`;
+  // Override with theme colors - Thomas boilerplate dark
+  customStyles.control.backgroundColor = themeContext?.secondaryBackground ? `rgb(${themeContext.secondaryBackground})` : '#1A1B1E';
+  customStyles.menu.backgroundColor = themeContext?.secondaryBackground ? `rgb(${themeContext.secondaryBackground})` : '#1A1B1E';
+  customStyles.menuList.backgroundColor = themeContext?.secondaryBackground ? `rgb(${themeContext.secondaryBackground})` : '#1A1B1E';
 
   return (
     <Container>

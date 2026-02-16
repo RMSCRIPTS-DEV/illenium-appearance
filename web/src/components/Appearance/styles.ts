@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
-// Color theme matching ox_inventory cyan/teal style
-// Main: rgba(18, 26, 28, 0.87) - dark teal
-// Accent: #C2F4F9 - cyan
-// Border: rgba(194, 244, 249, 0.4) - cyan border
-// Slot: rgba(56, 79, 82, 0.31)
+/* Thomas boilerplate theme - dark grayscale + Mantine blue accent
+ * dark[0]: #C1C2C5, dark[1]: #A6A7AB, dark[2]: #909296, dark[3]: #5c5f66
+ * dark[4]: #373A40, dark[5]: #2C2E33, dark[6]: #25262b, dark[7]: #1A1B1E
+ * dark[8]: #141517, dark[9]: #101113
+ * Mantine blue: #228be6 (primary), #339af0 (hover), #74c0fc (light)
+ */
+const ACCENT_BLUE = '#228be6';
+const ACCENT_BLUE_HOVER = '#339af0';
+const ACCENT_BLUE_LIGHT = 'rgba(34, 139, 230, 0.15)';
 
 export const Wrapper = styled.div`
   height: 100vh;
@@ -13,7 +17,7 @@ export const Wrapper = styled.div`
   align-items: stretch;
   justify-content: flex-end;
   overflow: hidden;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   cursor: grab;
   
   &:active {
@@ -31,8 +35,8 @@ export const ContentPanel = styled.div`
   flex-direction: column;
   width: 300px;
   height: calc(100% - 20px);
-  background: rgba(18, 26, 28, 0.87);
-  border: 1px solid rgba(194, 244, 249, 0.4);
+  background: #1A1B1E;
+  border: 1px solid #2C2E33;
   border-radius: 12px;
   margin: 10px 0;
   box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
@@ -63,7 +67,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid rgba(194, 244, 249, 0.15);
+  border-bottom: 1px solid #2C2E33;
 `;
 
 export const HeaderIcon = styled.div`
@@ -72,12 +76,12 @@ export const HeaderIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.3);
+  background: #25262b;
+  border: 1px solid #373A40;
   border-radius: 8px;
   
   svg {
-    color: #C2F4F9;
+    color: ${ACCENT_BLUE};
     width: 20px;
     height: 20px;
   }
@@ -89,13 +93,13 @@ export const HeaderText = styled.div`
   h1 {
     font-size: 14px;
     font-weight: 600;
-    color: #ffffff;
+    color: #C1C2C5;
     margin: 0 0 2px 0;
   }
   
   p {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
+    color: #909296;
     margin: 0;
   }
 `;
@@ -111,17 +115,17 @@ export const Container = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(194, 244, 249, 0.05);
+    background: #101113;
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(194, 244, 249, 0.3);
+    background: #373A40;
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: rgba(194, 244, 249, 0.5);
+    background: ${ACCENT_BLUE};
   }
 `;
 
@@ -129,47 +133,45 @@ export const FooterButtons = styled.div`
   display: flex;
   gap: 8px;
   padding: 12px 16px;
-  background: rgba(12, 18, 20, 0.95);
-  border-top: 1px solid rgba(194, 244, 249, 0.15);
+  background: #141517;
+  border-top: 1px solid #2C2E33;
 `;
 
 interface ActionButtonProps {
   variant?: 'primary' | 'secondary';
 }
 
+/* rm-billing style: filled=active/primary, light=inactive, radius sm, normal case */
 export const ActionButton = styled.button<ActionButtonProps>`
   flex: 1;
-  padding: 10px 16px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 4px;
   font-size: 12px;
   font-weight: 600;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   cursor: pointer;
-  transition: all 0.15s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
   
   ${({ variant }) => variant === 'primary' ? `
-    background-color: rgba(56, 79, 82, 0.31);
-    border: 1px solid rgba(194, 244, 249, 0.15);
-    color: #C2F4F9;
+    background-color: ${ACCENT_BLUE};
+    border: none;
+    color: #ffffff;
     
     &:hover {
-      background-color: rgba(194, 244, 249, 0.08);
-      border-color: rgba(194, 244, 249, 0.3);
+      background-color: ${ACCENT_BLUE_HOVER};
     }
     
     &:active {
       transform: scale(0.98);
     }
   ` : `
-    background-color: rgba(56, 79, 82, 0.31);
-    border: 1px solid rgba(194, 244, 249, 0.15);
-    color: #C2F4F9;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #C1C2C5;
     
     &:hover {
-      background-color: rgba(194, 244, 249, 0.08);
-      border-color: rgba(194, 244, 249, 0.3);
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
     }
     
     &:active {
@@ -181,8 +183,8 @@ export const ActionButton = styled.button<ActionButtonProps>`
 export const Sidebar = styled.div`
   width: 72px;
   height: calc(100% - 20px);
-  background: rgba(18, 26, 28, 0.87);
-  border: 1px solid rgba(194, 244, 249, 0.4);
+  background: #1A1B1E;
+  border: 1px solid #2C2E33;
   border-radius: 12px;
   margin: 10px 10px 10px 8px;
   display: flex;
@@ -232,40 +234,40 @@ export const SidebarItem = styled.button<SidebarItemProps>`
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: ${({ active }) => active ? 'rgba(194, 244, 249, 0.15)' : 'rgba(56, 79, 82, 0.31)'};
-  border: 1px solid ${({ active }) => active ? 'rgba(194, 244, 249, 0.5)' : 'rgba(194, 244, 249, 0.2)'};
-  box-shadow: ${({ active }) => active ? 'inset 0 1px 0 rgba(255, 255, 255, 0.05)' : 'none'};
+  background: ${({ active }) => active ? ACCENT_BLUE_LIGHT : 'transparent'};
+  border: 1px solid ${({ active }) => active ? ACCENT_BLUE : '#2C2E33'};
+  box-shadow: ${({ active }) => active ? '0 0 0 1px rgba(34, 139, 230, 0.2)' : 'none'};
   
   svg {
     width: 18px;
     height: 18px;
-    color: ${({ active }) => active ? '#C2F4F9' : 'rgba(255, 255, 255, 0.5)'};
+    color: ${({ active }) => active ? ACCENT_BLUE : '#5c5f66'};
     transition: color 0.2s ease;
   }
   
   span {
     font-size: 9px;
     font-weight: 500;
-    color: ${({ active }) => active ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'};
+    color: ${({ active }) => active ? '#C1C2C5' : '#5c5f66'};
     transition: color 0.2s ease;
   }
   
   &:hover {
-    background: rgba(194, 244, 249, 0.12);
-    border-color: rgba(194, 244, 249, 0.4);
+    background: ${({ active }) => active ? ACCENT_BLUE_LIGHT : '#25262b'};
+    border-color: ${({ active }) => active ? ACCENT_BLUE : '#373A40'};
     
     svg {
-      color: #C2F4F9;
+      color: ${({ active }) => active ? ACCENT_BLUE_HOVER : ACCENT_BLUE};
     }
     
     span {
-      color: #ffffff;
+      color: ${({ active }) => active ? '#C1C2C5' : ACCENT_BLUE};
     }
   }
 `;
 
 export const SectionWrapper = styled.div`
-  border-bottom: 1px solid rgba(194, 244, 249, 0.1);
+  border-bottom: 1px solid #2C2E33;
 `;
 
 interface SectionHeaderProps {
@@ -284,20 +286,24 @@ export const SectionHeader = styled.button<SectionHeaderProps>`
   transition: background 0.2s ease;
   
   &:hover {
-    background: rgba(194, 244, 249, 0.08);
+    background: #25262b;
+    
+    span { color: ${ACCENT_BLUE}; }
+    svg { color: ${ACCENT_BLUE}; }
   }
   
   span {
     font-size: 12px;
     font-weight: 500;
-    color: #ffffff;
+    color: #C1C2C5;
+    transition: color 0.2s ease;
   }
   
   svg {
     width: 14px;
     height: 14px;
-    color: #C2F4F9;
-    transition: transform 0.25s ease;
+    color: #909296;
+    transition: transform 0.25s ease, color 0.2s ease;
     transform: ${({ expanded }) => expanded ? 'rotate(180deg)' : 'rotate(0)'};
   }
 `;
@@ -317,23 +323,23 @@ export const ControlRow = styled.div`
 
 export const ControlLabel = styled.label`
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #909296;
   font-weight: 500;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
 `;
 
 export const NumberInput = styled.div`
   display: flex;
   align-items: center;
-  background-color: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.15);
+  background-color: #25262b;
+  border: 1px solid #373A40;
   border-radius: 6px;
   overflow: hidden;
   transition: all 0.15s ease;
   
   &:hover {
-    background-color: rgba(194, 244, 249, 0.15);
-    border-color: rgba(194, 244, 249, 0.4);
+    background-color: #2C2E33;
+    border-color: #5c5f66;
   }
 `;
 
@@ -347,19 +353,19 @@ export const NumberButton = styled.button`
   border: none;
   cursor: pointer;
   transition: all 0.15s ease;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   
   svg {
     width: 12px;
     height: 12px;
-    color: rgba(194, 244, 249, 0.5);
+    color: #5c5f66;
   }
   
   &:hover {
-    background: rgba(194, 244, 249, 0.15);
+    background: #373A40;
     
     svg {
-      color: #C2F4F9;
+      color: #A6A7AB;
     }
   }
 `;
@@ -368,9 +374,9 @@ export const NumberValue = styled.span`
   flex: 1;
   text-align: center;
   font-size: 12px;
-  color: #ffffff;
+  color: #C1C2C5;
   font-weight: 500;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
 `;
 
 export const FlexWrapper = styled.div`
@@ -392,8 +398,8 @@ export const CameraButtons = styled.div`
   flex-direction: row;
   gap: 10px;
   padding: 12px;
-  background: rgba(18, 26, 28, 0.95);
-  border: 1px solid rgba(194, 244, 249, 0.2);
+  background: #1A1B1E;
+  border: 1px solid #2C2E33;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   z-index: 100;
@@ -403,6 +409,7 @@ interface CameraButtonProps {
   active?: boolean;
 }
 
+/* rm-billing tab style */
 export const CameraButton = styled.button<CameraButtonProps>`
   width: 50px;
   height: 50px;
@@ -411,39 +418,35 @@ export const CameraButton = styled.button<CameraButtonProps>`
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background-color: ${({ active }) => active ? 'rgba(194, 244, 249, 0.12)' : 'rgba(56, 79, 82, 0.31)'};
-  border: 1px solid ${({ active }) => active ? 'rgba(194, 244, 249, 0.4)' : 'rgba(194, 244, 249, 0.15)'};
-  border-radius: 8px;
+  background-color: ${({ active }) => active ? ACCENT_BLUE : 'rgba(255, 255, 255, 0.05)'};
+  border: ${({ active }) => active ? 'none' : '1px solid rgba(255, 255, 255, 0.1)'};
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   
   svg {
     width: 20px;
     height: 20px;
-    color: ${({ active }) => active ? '#C2F4F9' : 'rgba(194, 244, 249, 0.6)'};
+    color: ${({ active }) => active ? '#ffffff' : '#909296'};
     transition: color 0.15s ease;
   }
   
   span {
     font-size: 8px;
     font-weight: 600;
-    color: ${({ active }) => active ? '#ffffff' : 'rgba(255, 255, 255, 0.6)'};
+    color: ${({ active }) => active ? '#ffffff' : '#909296'};
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    font-family: 'Bai Jamjuree', sans-serif;
+    font-family: 'Nexa-Book', sans-serif;
   }
   
   &:hover {
-    background-color: rgba(194, 244, 249, 0.08);
-    border-color: rgba(194, 244, 249, 0.3);
+    background-color: ${({ active }) => active ? ACCENT_BLUE_HOVER : 'rgba(255, 255, 255, 0.1)'};
+    border-color: ${({ active }) => active ? 'transparent' : 'rgba(255, 255, 255, 0.2)'};
     
-    svg {
-      color: #C2F4F9;
-    }
-    
-    span {
-      color: rgba(255, 255, 255, 0.9);
+    svg, span {
+      color: ${({ active }) => active ? '#ffffff' : '#C1C2C5'};
     }
   }
   
@@ -461,15 +464,15 @@ export const ControlsInfo = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 20px;
-  background: rgba(18, 26, 28, 0.87);
-  border: 1px solid rgba(194, 244, 249, 0.3);
+  background: #1A1B1E;
+  border: 1px solid #2C2E33;
   border-radius: 8px;
   padding: 10px 20px;
   z-index: 100;
   
   span {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.6);
+    color: #909296;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -482,18 +485,18 @@ export const ControlsInfo = styled.div`
     min-width: 22px;
     height: 22px;
     padding: 0 6px;
-    background: rgba(56, 79, 82, 0.5);
-    border: 1px solid rgba(194, 244, 249, 0.4);
+    background: #25262b;
+    border: 1px solid #373A40;
     border-radius: 4px;
     font-size: 11px;
     font-weight: 600;
-    color: #C2F4F9;
-    font-family: 'Bai Jamjuree', sans-serif;
+    color: ${ACCENT_BLUE};
+    font-family: 'Nexa-Book', sans-serif;
   }
 `;
 
 export const ControlsDivider = styled.div`
   width: 1px;
   height: 20px;
-  background: rgba(194, 244, 249, 0.3);
+  background: rgba(34, 139, 230, 0.4);
 `;

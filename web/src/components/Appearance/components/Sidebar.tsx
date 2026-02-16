@@ -28,11 +28,16 @@ interface SidebarProps {
   config?: SidebarConfig;
 }
 
+/* Mantine blue accent - #228be6 (primary), #339af0 (hover), #74c0fc (light) */
+const ACCENT_BLUE = '#228be6';
+const ACCENT_BLUE_HOVER = '#339af0';
+const ACCENT_BLUE_LIGHT = 'rgba(34, 139, 230, 0.15)';
+
 const SidebarContainer = styled.div`
   width: 72px;
   height: calc(100% - 20px);
-  background: rgba(18, 26, 28, 0.87);
-  border: 1px solid rgba(194, 244, 249, 0.4);
+  background: #1A1B1E;
+  border: 1px solid #2C2E33;
   border-radius: 12px;
   margin: 10px 10px 10px 8px;
   display: flex;
@@ -71,6 +76,7 @@ interface SidebarItemProps {
   active: boolean;
 }
 
+/* rm-billing tab style: filled when active, light when inactive */
 const SidebarItem = styled.button<SidebarItemProps>`
   width: 56px;
   height: 56px;
@@ -79,37 +85,33 @@ const SidebarItem = styled.button<SidebarItemProps>`
   align-items: center;
   justify-content: center;
   gap: 4px;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: ${({ active }) => active ? 'rgba(194, 244, 249, 0.15)' : 'rgba(56, 79, 82, 0.31)'};
-  border: 1px solid ${({ active }) => active ? 'rgba(194, 244, 249, 0.5)' : 'rgba(194, 244, 249, 0.2)'};
-  box-shadow: ${({ active }) => active ? 'inset 0 1px 0 rgba(255, 255, 255, 0.05)' : 'none'};
+  background: ${({ active }) => active ? ACCENT_BLUE : 'rgba(255, 255, 255, 0.05)'};
+  border: ${({ active }) => active ? 'none' : '1px solid rgba(255, 255, 255, 0.1)'};
   
   svg {
     width: 18px;
     height: 18px;
-    color: ${({ active }) => active ? '#C2F4F9' : 'rgba(255, 255, 255, 0.5)'};
+    color: ${({ active }) => active ? '#ffffff' : '#909296'};
     transition: color 0.2s ease;
   }
   
   span {
     font-size: 9px;
     font-weight: 500;
-    color: ${({ active }) => active ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'};
+    color: ${({ active }) => active ? '#ffffff' : '#909296'};
     transition: color 0.2s ease;
+    font-family: 'Nexa-Book', sans-serif;
   }
   
   &:hover {
-    background: rgba(194, 244, 249, 0.12);
-    border-color: rgba(194, 244, 249, 0.4);
+    background: ${({ active }) => active ? ACCENT_BLUE_HOVER : 'rgba(255, 255, 255, 0.1)'};
+    border-color: ${({ active }) => active ? 'transparent' : 'rgba(255, 255, 255, 0.2)'};
     
-    svg {
-      color: #C2F4F9;
-    }
-    
-    span {
-      color: #ffffff;
+    svg, span {
+      color: ${({ active }) => active ? '#ffffff' : '#C1C2C5'};
     }
   }
 `;

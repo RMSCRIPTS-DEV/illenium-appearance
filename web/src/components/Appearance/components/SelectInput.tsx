@@ -19,7 +19,7 @@ const Container = styled.div`
 
 const Label = styled.span`
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #909296;
   font-weight: 500;
   text-transform: uppercase;
 `;
@@ -30,44 +30,46 @@ const SelectButton = styled.button<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.15);
+  background-color: #25262b;
+  border: 1px solid #373A40;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   
   span {
     font-size: 12px;
-    color: #ffffff;
+    color: #C1C2C5;
   }
   
   svg {
     width: 14px;
     height: 14px;
-    color: #C2F4F9;
+    color: #228be6;
     transition: transform 0.25s ease;
     transform: ${({ isOpen }) => isOpen ? 'rotate(180deg)' : 'rotate(0)'};
   }
   
   &:hover {
-    background-color: rgba(194, 244, 249, 0.15);
-    border-color: rgba(194, 244, 249, 0.4);
+    background-color: #2C2E33;
+    border-color: #228be6;
+    
+    svg { color: #339af0; }
   }
 `;
 
 const Dropdown = styled.div`
   width: 100%;
-  background: rgba(18, 26, 28, 0.95);
+  background: #1A1B1E;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(194, 244, 249, 0.4);
+  border: 1px solid #2C2E33;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 `;
 
 const SearchWrapper = styled.div`
   padding: 10px;
-  border-bottom: 1px solid rgba(194, 244, 249, 0.15);
+  border-bottom: 1px solid #2C2E33;
 `;
 
 const SearchInput = styled.div`
@@ -75,14 +77,14 @@ const SearchInput = styled.div`
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  background-color: rgba(18, 26, 28, 0.95);
-  border: 1px solid rgba(194, 244, 249, 0.2);
+  background-color: #25262b;
+  border: 1px solid #373A40;
   border-radius: 6px;
   
   svg {
     width: 14px;
     height: 14px;
-    color: rgba(194, 244, 249, 0.5);
+    color: #5c5f66;
   }
   
   input {
@@ -91,16 +93,16 @@ const SearchInput = styled.div`
     border: none;
     outline: none;
     font-size: 12px;
-    color: #ffffff;
-    font-family: 'Bai Jamjuree', sans-serif;
+    color: #C1C2C5;
+    font-family: 'Nexa-Book', sans-serif;
     
     &::placeholder {
-      color: rgba(194, 244, 249, 0.4);
+      color: #5c5f66;
     }
     
     &:focus {
       outline: none;
-      border-color: rgba(194, 244, 249, 0.4);
+      border-color: #5c5f66;
     }
   }
 `;
@@ -115,12 +117,12 @@ const OptionsList = styled.div`
   }
   
   &::-webkit-scrollbar-track {
-    background: rgba(194, 244, 249, 0.05);
+    background: #101113;
     border-radius: 4px;
   }
   
   &::-webkit-scrollbar-thumb {
-    background: rgba(194, 244, 249, 0.3);
+    background: #373A40;
     border-radius: 4px;
   }
 `;
@@ -131,17 +133,17 @@ const Option = styled.button<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   gap: 10px;
-  background: ${({ isSelected }) => isSelected ? 'rgba(194, 244, 249, 0.2)' : 'transparent'};
-  border: 1px solid ${({ isSelected }) => isSelected ? 'rgba(194, 244, 249, 0.4)' : 'transparent'};
+  background: ${({ isSelected }) => isSelected ? 'rgba(34, 139, 230, 0.15)' : 'transparent'};
+  border: 1px solid ${({ isSelected }) => isSelected ? '#228be6' : 'transparent'};
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: left;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: 'Nexa-Book', sans-serif;
   
   &:hover {
-    background: rgba(194, 244, 249, 0.12);
-    border-color: rgba(194, 244, 249, 0.2);
+    background: rgba(34, 139, 230, 0.12);
+    border-color: rgba(34, 139, 230, 0.3);
   }
 `;
 
@@ -149,14 +151,14 @@ const OptionIcon = styled.div`
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.2);
+  background: #25262b;
+  border: 1px solid #373A40;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 10px;
   font-weight: 600;
-  color: #C2F4F9;
+  color: #C1C2C5;
   overflow: hidden;
   
   img {
@@ -168,7 +170,7 @@ const OptionIcon = styled.div`
 
 const OptionLabel = styled.span`
   font-size: 12px;
-  color: #ffffff;
+  color: #C1C2C5;
 `;
 
 const SelectInput = ({ title, items, defaultValue, clientValue, onChange }: SelectInputProps) => {

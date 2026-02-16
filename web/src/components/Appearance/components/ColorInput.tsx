@@ -22,7 +22,7 @@ const Container = styled.div`
 
 const Label = styled.span`
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #909296;
   font-weight: 500;
 `;
 
@@ -31,8 +31,8 @@ const ColorsWrapper = styled.div`
   flex-wrap: wrap;
   gap: 5px;
   padding: 10px;
-  background-color: rgba(56, 79, 82, 0.31);
-  border: 1px solid rgba(194, 244, 249, 0.15);
+  background-color: #25262b;
+  border: 1px solid #373A40;
   border-radius: 6px;
 `;
 
@@ -40,13 +40,13 @@ const ColorButton = styled.button<ButtonProps>`
   width: 22px;
   height: 22px;
   border-radius: 4px;
-  border: 2px solid ${({ selected }) => selected ? '#C2F4F9' : 'rgba(194, 244, 249, 0.2)'};
+  border: 2px solid ${({ selected }) => selected ? '#228be6' : '#373A40'};
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: ${({ selected }) => selected ? '0 0 8px rgba(194, 244, 249, 0.4)' : 'none'};
+  box-shadow: ${({ selected }) => selected ? '0 0 8px rgba(34, 139, 230, 0.4)' : 'none'};
 
   &:hover {
-    border-color: rgba(194, 244, 249, 0.6);
+    border-color: #228be6;
     transform: scale(1.1);
   }
 `;

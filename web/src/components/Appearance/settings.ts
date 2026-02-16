@@ -598,3 +598,40 @@ export const CAMERA_INITIAL_STATE = { head: false, body: false, bottom: false };
 export const ROTATE_INITIAL_STATE = { left: false, right: false };
 
 export const CLOTHES_INITIAL_STATE = { head: false, body: false, bottom: false };
+
+/**
+ * Example outfit for dev mode - varied clothing to demonstrate the UI
+ * Components: 0=face, 1=mask, 2=hair, 3=torso, 4=legs, 5=bag, 6=shoes, 7=scarf, 8=undershirt, 9=armor, 10=decals, 11=jacket
+ */
+export const DEV_APPEARANCE_EXAMPLE: PedAppearance = {
+  ...APPEARANCE_INITIAL_STATE,
+  model: 'mp_f_freemode_01',
+  hair: {
+    style: 4,
+    color: 2,
+    highlight: 0,
+    texture: 0,
+  },
+  eyeColor: 2,
+  components: [
+    { component_id: 0, drawable: 0, texture: 0 },
+    { component_id: 1, drawable: 0, texture: 0 },
+    { component_id: 2, drawable: 4, texture: 0 },
+    { component_id: 3, drawable: 15, texture: 1 },
+    { component_id: 4, drawable: 14, texture: 0 },
+    { component_id: 5, drawable: 0, texture: 0 },
+    { component_id: 6, drawable: 5, texture: 0 },
+    { component_id: 7, drawable: 0, texture: 0 },
+    { component_id: 8, drawable: 15, texture: 0 },
+    { component_id: 9, drawable: 0, texture: 0 },
+    { component_id: 10, drawable: 0, texture: 0 },
+    { component_id: 11, drawable: 15, texture: 1 },
+  ],
+  props: [
+    { prop_id: 0, drawable: 5, texture: 0 },
+    { prop_id: 1, drawable: 5, texture: 0 },
+    { prop_id: 2, drawable: -1, texture: 0 },
+    { prop_id: 6, drawable: -1, texture: 0 },
+    { prop_id: 7, drawable: -1, texture: 0 },
+  ],
+};
