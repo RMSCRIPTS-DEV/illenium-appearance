@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+const ACCENT_BLUE = '#4dabf7';
+const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
+
 export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -31,7 +34,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-/* rm-billing modal style: Create=blue filled, Cancel=light */
+/* Same light blue style as Hat/Torso/Pants - light tint + blue border */
 export const Buttons = styled.div`
   display: flex;
   gap: 12px;
@@ -53,17 +56,18 @@ export const Buttons = styled.div`
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
+        border-color: ${ACCENT_BLUE};
+        color: ${ACCENT_BLUE};
       }
     }
     
     &:first-child {
-      background-color: #4dabf7;
-      border: none;
-      color: #ffffff;
+      background-color: ${ACCENT_BLUE_LIGHT};
+      border: 1px solid ${ACCENT_BLUE};
+      color: ${ACCENT_BLUE};
       
       &:hover {
-        background-color: #74c0fc;
+        background-color: rgba(77, 171, 247, 0.25);
       }
     }
     

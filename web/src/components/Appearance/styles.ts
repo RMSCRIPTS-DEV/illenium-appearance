@@ -140,7 +140,7 @@ interface ActionButtonProps {
   variant?: 'primary' | 'secondary';
 }
 
-/* rm-billing style: filled=active/primary, light=inactive, radius sm, normal case */
+/* Same light blue style as Hat/Torso/Pants - light tint + blue border */
 export const ActionButton = styled.button<ActionButtonProps>`
   flex: 1;
   padding: 8px 14px;
@@ -152,12 +152,13 @@ export const ActionButton = styled.button<ActionButtonProps>`
   transition: all 0.2s ease;
   
   ${({ variant }) => variant === 'primary' ? `
-    background-color: ${ACCENT_BLUE};
-    border: none;
-    color: #ffffff;
+    background-color: ${ACCENT_BLUE_LIGHT};
+    border: 1px solid ${ACCENT_BLUE};
+    color: ${ACCENT_BLUE};
     
     &:hover {
-      background-color: ${ACCENT_BLUE_HOVER};
+      background-color: rgba(77, 171, 247, 0.25);
+      border-color: ${ACCENT_BLUE};
     }
     
     &:active {
@@ -170,7 +171,8 @@ export const ActionButton = styled.button<ActionButtonProps>`
     
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: ${ACCENT_BLUE};
+      color: ${ACCENT_BLUE};
     }
     
     &:active {
@@ -408,7 +410,7 @@ interface CameraButtonProps {
   active?: boolean;
 }
 
-/* rm-billing tab style */
+/* Same light blue style as Hat/Torso/Pants sidebar buttons */
 export const CameraButton = styled.button<CameraButtonProps>`
   width: 50px;
   height: 50px;
@@ -417,8 +419,8 @@ export const CameraButton = styled.button<CameraButtonProps>`
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background-color: ${({ active }) => active ? ACCENT_BLUE : 'rgba(255, 255, 255, 0.05)'};
-  border: ${({ active }) => active ? 'none' : '1px solid rgba(255, 255, 255, 0.1)'};
+  background-color: ${({ active }) => active ? ACCENT_BLUE_LIGHT : 'rgba(255, 255, 255, 0.05)'};
+  border: ${({ active }) => active ? `1px solid ${ACCENT_BLUE}` : '1px solid rgba(255, 255, 255, 0.1)'};
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -427,25 +429,25 @@ export const CameraButton = styled.button<CameraButtonProps>`
   svg {
     width: 20px;
     height: 20px;
-    color: ${({ active }) => active ? '#ffffff' : '#909296'};
+    color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
     transition: color 0.15s ease;
   }
   
   span {
     font-size: 8px;
     font-weight: 600;
-    color: ${({ active }) => active ? '#ffffff' : '#909296'};
+    color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
     text-transform: uppercase;
     letter-spacing: 0.3px;
     font-family: 'Nexa-Book', sans-serif;
   }
   
   &:hover {
-    background-color: ${({ active }) => active ? ACCENT_BLUE_HOVER : 'rgba(255, 255, 255, 0.1)'};
-    border-color: ${({ active }) => active ? 'transparent' : 'rgba(255, 255, 255, 0.2)'};
+    background-color: ${({ active }) => active ? ACCENT_BLUE_LIGHT : 'rgba(255, 255, 255, 0.1)'};
+    border-color: ${({ active }) => active ? ACCENT_BLUE : 'rgba(255, 255, 255, 0.2)'};
     
     svg, span {
-      color: ${({ active }) => active ? '#ffffff' : '#C1C2C5'};
+      color: ${({ active }) => active ? ACCENT_BLUE : '#C1C2C5'};
     }
   }
   
@@ -497,5 +499,5 @@ export const ControlsInfo = styled.div`
 export const ControlsDivider = styled.div`
   width: 1px;
   height: 20px;
-  background: rgba(34, 139, 230, 0.4);
+  background: rgba(77, 171, 247, 0.4);
 `;
