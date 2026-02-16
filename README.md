@@ -1,64 +1,44 @@
-# illenium-appearance
+# RM Scripts - illenium-appearance Redesigned UI
 
-A replacement for clothing resources for various frameworks
+A modern UI redesign of the popular illenium-appearance clothing system for FiveM.
 
-<div align='center'><h1><a href='https://docs.illenium.dev/free-resources/illenium-appearance/installation/'>Documentation</a></h3></div>
-<br>
+<div align='center'>
+  <img src="https://i.imgur.com/gWTKrvu.jpeg" alt="RM Scripts UI Redesign Preview" />
+</div>
 
-<img src="https://i.imgur.com/gWTKrvu.jpeg" alt="illenium-appearance with Tattoos" />
+## 🎨 About This Project
 
-Discord: https://discord.illenium.dev
+This is a **complete UI redesign** of the original [illenium-appearance](https://github.com/iLLeniumStudios/illenium-appearance) resource. All core functionality remains intact while providing a fresh, modern interface.
 
-**Note:** Do **NOT** use the `main` branch as it will most likely be broken for you. NO SUPPORT WILL BE PROVIDED IF YOU USE IT. Only use the [latest release](https://github.com/iLLeniumStudios/illenium-appearance/releases/latest)
+## 🔓 Open Source
 
-## Supported Frameworks
+This project is **fully open source** - both the redesigned UI and all code modifications are freely available for the community to use and modify.
 
-- qb-core
-- ESX
-- ox_core
+## 🙏 Original Credits
 
-## Dependencies
+Built upon the excellent work of:
+- **Original Script**: [fivem-appearance](https://github.com/pedr0fontoura/fivem-appearance) by pedr0fontoura
+- **Tattoos Support**: [fivem-appearance](https://github.com/franfdezmorales/fivem-appearance) by franfdezmorales
+- **QB Maintained Fork**: [aj-fivem-appearance](https://github.com/mirrox1337/aj-fivem-appearance) by mirrox1337
+- **Core System**: [illenium-appearance](https://github.com/iLLeniumStudios/illenium-appearance) by iLLenium Studios
 
-- [qb-core](https://github.com/qbcore-framework/qb-core) (Latest) (Only for qb-core based servers)
-- [es_extended](https://github.com/esx-framework/esx-legacy) (Latest) (Only for ESX based servers)
-- [ox_core](https://github.com/overextended/ox_core) (experimental) (Only for ox_core based servers)
-- [ox_lib](https://github.com/overextended/ox_lib)
-- [qb-target](https://github.com/BerkieBb/qb-target) (Optional) (Only for qb-core based servers)
+## 📖 Documentation
 
-## Features
+For installation and configuration, refer to the original documentation:  
+**[illenium-appearance Documentation](https://docs.illenium.dev/free-resources/illenium-appearance/installation/)**
 
-- Everything from standalone fivem-appearance
-- UI from OX Lib
-- Player outfits
-- Rank based Clothing Rooms for Jobs / Gangs
-- Job / Gang locked Stores
-- Tattoo's Support
-- Hair Textures
-- Polyzone Support
-- Ped Menu command (/pedmenu) (Configurable)
-- Reload Skin command (/reloadskin)
-- Improved code quality
-- Plastic Surgeons
-- qb-target Support
-- Skin migration support (qb-clothing / old fivem-appearance / esx_skin)
-- Player specific outfit locations (Restricted via CitizenID)
-- Makeup Secondary Color
-- Blacklist / Limit Components & Props to certain Jobs / Gangs / CitizenIDs / ACEs (Allows you to have VIP clothing on your Server)
-- Blacklist / Limit Peds to certain Jobs / Gangs / CitizenIDs / ACEs
-- Persist Job / Gang Clothes on reconnects / logout
-- Themes Support (Default & QBCore provided out of the box)
-- Disable Components / Props Entirely (Clothing as items support)
+## 💬 Support
 
-## New Preview (with Tattoos)
+- **Original Discord**: [illenium.dev Discord](https://discord.illenium.dev)
+- **Issues**: Report bugs via GitHub Issues
 
-https://streamable.com/qev2h7
+## 📄 License
 
-## Documentation
+Maintains the same open-source license as the original illenium-appearance.
 
-Read the docs here: https://docs.illenium.dev
+---
 
-## Credits
-- Original Script: https://github.com/pedr0fontoura/fivem-appearance
-- Tattoo's Support: https://github.com/franfdezmorales/fivem-appearance
-- Last Maintained Fork for QB: https://github.com/mirrox1337/aj-fivem-appearance
-
+<div align='center'>
+  <p>Made with ❤️ by RM Scripts | Based on illenium-appearance</p>
+  <p>⭐ Star this repo if you find it useful!</p>
+</div>
