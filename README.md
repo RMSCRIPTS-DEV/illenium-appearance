@@ -27,8 +27,10 @@ Built upon the excellent work of:
 For installation and configuration, refer to the original documentation:  
 **[illenium-appearance Documentation](https://docs.illenium.dev/free-resources/illenium-appearance/installation/)**
 
-## 💬 Support
+## 💬 Support & Community
 
+- **Our Discord**: [Join RM Scripts Discord](https://discord.com/invite/JuKgfmbCpQ)
+- **Our Store**: [rm-scripts.dev](https://rm-scripts.dev)
 - **Original Discord**: [illenium.dev Discord](https://discord.illenium.dev)
 - **Issues**: Report bugs via GitHub Issues
 
@@ -41,4 +43,5 @@ Maintains the same open-source license as the original illenium-appearance.
 <div align='center'>
   <p>Made with ❤️ by RM Scripts | Based on illenium-appearance</p>
   <p>⭐ Star this repo if you find it useful!</p>
+  <p>🛒 <a href="https://rm-scripts.dev">Visit Our Store</a> | 💬 <a href="https://discord.com/invite/JuKgfmbCpQ">Join Our Discord</a></p>
 </div>
