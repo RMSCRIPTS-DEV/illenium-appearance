@@ -1,0 +1,17 @@
+{
+  "name": "fivem-appearance",
+  "version": "1.2.2",
+  "repository": "git@github.com:pedr0fontoura/fivem-appearance.git",
+  "author": "snakewiz",
+  "license": "MIT",
+  "scripts": {
+    "build:game": "cd game && yarn && yarn build",
+    "build:web": "cd web && yarn && yarn build",
+    "format:game": "cd game && yarn && yarn format",
+    "format:web": "cd web && yarn && yarn format",
+    "format": "yarn format:game && yarn format:web",
+    "build": "yarn build:game && yarn build:web",
+    "release": "yarn build && node release.js"
+  },
+  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387"
+}
