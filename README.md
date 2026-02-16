@@ -5,7 +5,7 @@ A replacement for clothing resources for various frameworks
 <div align='center'><h1><a href='https://docs.illenium.dev/free-resources/illenium-appearance/installation/'>Documentation</a></h3></div>
 <br>
 
-<img src="https://i.imgur.com/ltLSMmh.png" alt="illenium-appearance with Tattoos" />
+<img src="https://i.imgur.com/gWTKrvu.jpeg" alt="illenium-appearance with Tattoos" />
 
 Discord: https://discord.illenium.dev
 
@@ -61,3 +61,4 @@ Read the docs here: https://docs.illenium.dev
 - Original Script: https://github.com/pedr0fontoura/fivem-appearance
 - Tattoo's Support: https://github.com/franfdezmorales/fivem-appearance
 - Last Maintained Fork for QB: https://github.com/mirrox1337/aj-fivem-appearance
+
