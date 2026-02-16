@@ -58,12 +58,12 @@ export const Buttons = styled.div`
     }
     
     &:first-child {
-      background-color: #228be6;
+      background-color: #4dabf7;
       border: none;
       color: #ffffff;
       
       &:hover {
-        background-color: #339af0;
+        background-color: #74c0fc;
       }
     }
     

@@ -70,6 +70,6 @@ export default createGlobalStyle<{theme: any}>`
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #228be6;
+    background: #4dabf7;
   }
 `;

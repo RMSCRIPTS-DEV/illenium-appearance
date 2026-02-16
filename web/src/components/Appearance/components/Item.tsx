@@ -32,8 +32,8 @@ const Header = styled.button<HeaderProps>`
   &:hover {
     background: #25262b;
     
-    span { color: #228be6; }
-    svg { color: #339af0; }
+    span { color: #4dabf7; }
+    svg { color: #74c0fc; }
   }
   
   span {
@@ -45,17 +45,17 @@ const Header = styled.button<HeaderProps>`
   svg {
     width: 14px;
     height: 14px;
-    color: #228be6;
+    color: #4dabf7;
     transition: transform 0.25s ease;
     transform: ${({ expanded }) => expanded ? 'rotate(180deg)' : 'rotate(0)'};
   }
 `;
 
 const Content = styled.div`
-  padding: 0 16px 14px;
+  padding: 16px 16px 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 `;
 
 const Item: React.FC<ItemProps> = ({ children, title, defaultOpen = false }) => {

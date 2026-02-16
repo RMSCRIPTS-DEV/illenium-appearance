@@ -45,16 +45,16 @@ const SelectButton = styled.button<{ isOpen: boolean }>`
   svg {
     width: 14px;
     height: 14px;
-    color: #228be6;
+    color: #4dabf7;
     transition: transform 0.25s ease;
     transform: ${({ isOpen }) => isOpen ? 'rotate(180deg)' : 'rotate(0)'};
   }
   
   &:hover {
     background-color: #2C2E33;
-    border-color: #228be6;
+    border-color: #4dabf7;
     
-    svg { color: #339af0; }
+    svg { color: #74c0fc; }
   }
 `;
 
@@ -134,7 +134,7 @@ const Option = styled.button<{ isSelected: boolean }>`
   align-items: center;
   gap: 10px;
   background: ${({ isSelected }) => isSelected ? 'rgba(34, 139, 230, 0.15)' : 'transparent'};
-  border: 1px solid ${({ isSelected }) => isSelected ? '#228be6' : 'transparent'};
+  border: 1px solid ${({ isSelected }) => isSelected ? '#4dabf7' : 'transparent'};
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;

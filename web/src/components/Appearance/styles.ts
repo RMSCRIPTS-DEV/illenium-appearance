@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
-/* Thomas boilerplate theme - dark grayscale + Mantine blue accent
+/* Thomas boilerplate theme - dark grayscale + Mantine light blue accent
  * dark[0]: #C1C2C5, dark[1]: #A6A7AB, dark[2]: #909296, dark[3]: #5c5f66
  * dark[4]: #373A40, dark[5]: #2C2E33, dark[6]: #25262b, dark[7]: #1A1B1E
- * dark[8]: #141517, dark[9]: #101113
- * Mantine blue: #228be6 (primary), #339af0 (hover), #74c0fc (light)
+ * Mantine light blue: #4dabf7 (primary), #74c0fc (hover), rgba(77, 171, 247, 0.2) (light)
  */
-const ACCENT_BLUE = '#228be6';
-const ACCENT_BLUE_HOVER = '#339af0';
-const ACCENT_BLUE_LIGHT = 'rgba(34, 139, 230, 0.15)';
+const ACCENT_BLUE = '#4dabf7';
+const ACCENT_BLUE_HOVER = '#74c0fc';
+const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
 
 export const Wrapper = styled.div`
   height: 100vh;
@@ -309,10 +308,10 @@ export const SectionHeader = styled.button<SectionHeaderProps>`
 `;
 
 export const SectionContent = styled.div`
-  padding: 0 16px 14px;
+  padding: 16px 16px 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 `;
 
 export const ControlRow = styled.div`

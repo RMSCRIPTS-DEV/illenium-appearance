@@ -40,13 +40,13 @@ const ColorButton = styled.button<ButtonProps>`
   width: 22px;
   height: 22px;
   border-radius: 4px;
-  border: 2px solid ${({ selected }) => selected ? '#228be6' : '#373A40'};
+  border: 2px solid ${({ selected }) => selected ? '#4dabf7' : '#373A40'};
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: ${({ selected }) => selected ? '0 0 8px rgba(34, 139, 230, 0.4)' : 'none'};
 
   &:hover {
-    border-color: #228be6;
+    border-color: #4dabf7;
     transform: scale(1.1);
   }
 `;

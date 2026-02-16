@@ -62,7 +62,7 @@ const Button = styled.button`
     background: rgba(34, 139, 230, 0.15);
     
     svg {
-      color: #228be6;
+      color: #4dabf7;
     }
   }
   

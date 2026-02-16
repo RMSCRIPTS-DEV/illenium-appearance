@@ -894,6 +894,8 @@ const Appearance = () => {
           activeCategory={activeCategory} 
           onCategoryChange={setActiveCategory}
           config={config}
+          clothes={clothes}
+          onSetClothes={handleSetClothes}
         />
       </MainPanel>
     </Wrapper>

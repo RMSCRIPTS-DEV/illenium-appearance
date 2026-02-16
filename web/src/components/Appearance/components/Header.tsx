@@ -21,7 +21,7 @@ const HeaderIcon = styled.div`
   border-radius: 8px;
   
   svg {
-    color: #228be6;
+    color: #4dabf7;
     width: 20px;
     height: 20px;
   }

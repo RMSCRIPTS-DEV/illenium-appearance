@@ -35,8 +35,8 @@ const Header = styled.button<HeaderProps>`
   &:hover {
     background: #25262b;
     
-    span { color: #228be6; }
-    svg { color: #339af0; }
+    span { color: #4dabf7; }
+    svg { color: #74c0fc; }
   }
   
   span {
@@ -48,7 +48,7 @@ const Header = styled.button<HeaderProps>`
   svg {
     width: 16px;
     height: 16px;
-    color: #228be6;
+    color: #4dabf7;
     transition: transform 0.25s ease;
     transform: ${({ expanded }) => expanded ? 'rotate(180deg)' : 'rotate(0)'};
   }

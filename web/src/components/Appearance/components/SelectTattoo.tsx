@@ -62,12 +62,12 @@ const customStyles: any = {
   indicatorContainer: (styles: any) => ({
     ...styles,
     borderColor: '#373A40',
-    color: '#228be6',
+    color: '#4dabf7',
   }),
   dropdownIndicator: (styles: any) => ({
     ...styles,
     borderColor: '#373A40',
-    color: '#228be6',
+    color: '#4dabf7',
   }),
   menuPortal: (styles: any) => ({
     ...styles,
@@ -104,7 +104,7 @@ const customStyles: any = {
     marginLeft: 'auto',
     marginRight: 'auto',
     backgroundColor: isSelected ? 'rgba(34, 139, 230, 0.15)' : isFocused ? 'rgba(34, 139, 230, 0.08)' : 'transparent',
-    color: isSelected ? '#228be6' : isFocused ? '#228be6' : '#A6A7AB',
+    color: isSelected ? '#4dabf7' : isFocused ? '#4dabf7' : '#A6A7AB',
     fontFamily: 'Nexa-Book, sans-serif',
   }),
 };

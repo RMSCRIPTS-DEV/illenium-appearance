@@ -16,7 +16,7 @@ const CustomButton = styled.span<ButtonProps>`
   font-size: 12px;
   font-weight: 600;
   color: #ffffff;
-  background-color: #228be6;
+  background-color: #4dabf7;
   border: none;
   text-align: center;
   border-radius: 4px;
@@ -29,7 +29,7 @@ const CustomButton = styled.span<ButtonProps>`
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: #339af0;
+    background-color: #74c0fc;
   }
   
   &:active {

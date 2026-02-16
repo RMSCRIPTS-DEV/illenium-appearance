@@ -16,7 +16,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 `;
 
 const Label = styled.span`
@@ -63,7 +63,7 @@ const Button = styled.button`
     border-color: #373A40;
     
     svg {
-      color: #228be6;
+      color: #4dabf7;
     }
   }
   
