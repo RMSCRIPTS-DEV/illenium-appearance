@@ -37,12 +37,13 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
     return null;
   }
 
+  const l = locales.props;
   return (
     <>
       {propConfig.hats && (
-        <Item title="Hats">
+        <Item title={l.hats}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[0].drawable.min}
             max={settingsById[0].drawable.max}
             defaultValue={propsById[0].drawable}
@@ -51,7 +52,7 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropDrawableChange(0, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[0].texture.min}
             max={settingsById[0].texture.max}
             defaultValue={propsById[0].texture}
@@ -62,9 +63,9 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
         </Item>
       )}
       {propConfig.glasses && (
-        <Item title="Glasses">
+        <Item title={l.glasses}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[1].drawable.min}
             max={settingsById[1].drawable.max}
             defaultValue={propsById[1].drawable}
@@ -73,7 +74,7 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropDrawableChange(1, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[1].texture.min}
             max={settingsById[1].texture.max}
             defaultValue={propsById[1].texture}
@@ -84,9 +85,9 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
         </Item>
       )}
       {propConfig.ear && (
-        <Item title="Earpieces">
+        <Item title={l.ear}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[2].drawable.min}
             max={settingsById[2].drawable.max}
             defaultValue={propsById[2].drawable}
@@ -95,7 +96,7 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropDrawableChange(2, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[2].texture.min}
             max={settingsById[2].texture.max}
             defaultValue={propsById[2].texture}
@@ -106,9 +107,9 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
         </Item>
       )}
       {propConfig.watches && (
-        <Item title="Watches">
+        <Item title={l.watches}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[6].drawable.min}
             max={settingsById[6].drawable.max}
             defaultValue={propsById[6].drawable}
@@ -117,7 +118,7 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropDrawableChange(6, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[6].texture.min}
             max={settingsById[6].texture.max}
             defaultValue={propsById[6].texture}
@@ -128,9 +129,9 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
         </Item>
       )}
       {propConfig.bracelets && (
-        <Item title="Bracelets">
+        <Item title={l.bracelets}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[7].drawable.min}
             max={settingsById[7].drawable.max}
             defaultValue={propsById[7].drawable}
@@ -139,7 +140,7 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropDrawableChange(7, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[7].texture.min}
             max={settingsById[7].texture.max}
             defaultValue={propsById[7].texture}

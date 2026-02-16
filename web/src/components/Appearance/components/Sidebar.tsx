@@ -14,6 +14,7 @@ import {
 import { FaHatCowboy, FaTshirt } from 'react-icons/fa';
 import { GiTrousers } from 'react-icons/gi';
 import { ClothesState } from '../interfaces';
+import Locales from '../../../shared/interfaces/locales';
 
 interface SidebarConfig {
   ped?: boolean;
@@ -31,6 +32,7 @@ interface SidebarProps {
   config?: SidebarConfig;
   clothes?: ClothesState;
   onSetClothes?: (key: keyof ClothesState) => void;
+  locales?: Locales;
 }
 
 /* Mantine light blue accent - same as styles.ts */
@@ -172,25 +174,33 @@ const ClothesButton = styled.button<ClothesButtonProps>`
   }
 `;
 
-const allCategories = [
-  { id: 'ped', label: 'Characters', icon: IconUser, configKey: 'ped' },
-  { id: 'headBlend', label: 'Face', icon: IconMoodSmile, configKey: 'headBlend' },
-  { id: 'faceFeatures', label: 'Features', icon: IconEye, configKey: 'faceFeatures' },
-  { id: 'headOverlays', label: 'Skin', icon: IconDroplet, configKey: 'headOverlays' },
-  { id: 'hair', label: 'Hair', icon: IconScissors, configKey: 'headOverlays' },
-  { id: 'makeup', label: 'Makeup', icon: IconBrush, configKey: 'headOverlays' },
-  { id: 'tattoos', label: 'Tattoos', icon: IconWriting, configKey: 'tattoos' },
-  { id: 'components', label: 'Clothing', icon: IconShirt, configKey: 'components' },
-  { id: 'props', label: 'Accessories', icon: IconDeviceWatch, configKey: 'props' },
-];
+const CATEGORY_IDS = [
+  { id: 'ped', labelKey: 'ped', icon: IconUser, configKey: 'ped' },
+  { id: 'headBlend', labelKey: 'headBlend', icon: IconMoodSmile, configKey: 'headBlend' },
+  { id: 'faceFeatures', labelKey: 'faceFeatures', icon: IconEye, configKey: 'faceFeatures' },
+  { id: 'headOverlays', labelKey: 'headOverlays', icon: IconDroplet, configKey: 'headOverlays' },
+  { id: 'hair', labelKey: 'hair', icon: IconScissors, configKey: 'headOverlays' },
+  { id: 'makeup', labelKey: 'makeup', icon: IconBrush, configKey: 'headOverlays' },
+  { id: 'tattoos', labelKey: 'tattoos', icon: IconWriting, configKey: 'tattoos' },
+  { id: 'components', labelKey: 'components', icon: IconShirt, configKey: 'components' },
+  { id: 'props', labelKey: 'props', icon: IconDeviceWatch, configKey: 'props' },
+] as const;
 
-const Sidebar: React.FC<SidebarProps> = ({ activeCategory, onCategoryChange, config, clothes, onSetClothes }) => {
+const DEFAULT_LABELS: Record<string, string> = {
+  ped: 'Characters', headBlend: 'Face', faceFeatures: 'Features', headOverlays: 'Skin',
+  hair: 'Hair', makeup: 'Makeup', tattoos: 'Tattoos', components: 'Clothing', props: 'Accessories',
+};
+
+const Sidebar: React.FC<SidebarProps> = ({ activeCategory, onCategoryChange, config, clothes, onSetClothes, locales }) => {
   // Filter categories based on config
-  const categories = allCategories.filter(category => {
+  const categories = CATEGORY_IDS.filter(category => {
     if (!config) return true; // Show all if no config
     const configValue = config[category.configKey as keyof SidebarConfig];
     return configValue !== false; // Show if true or undefined
   });
+
+  const getLabel = (key: string) => (locales?.sidebar as Record<string, string>)?.[key] ?? DEFAULT_LABELS[key] ?? key;
+  const clothesLabels = locales?.sidebar?.clothes;
 
   return (
     <SidebarContainer>
@@ -203,23 +213,23 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCategory, onCategoryChange, con
             onClick={() => onCategoryChange(category.id)}
           >
             <Icon stroke={1.5} />
-            <span>{category.label}</span>
+            <span>{getLabel(category.labelKey)}</span>
           </SidebarItem>
         );
       })}
       {clothes && onSetClothes && (
         <ClothesSection>
-          <ClothesButton active={!!clothes.head} onClick={() => onSetClothes('head')} title="Toggle hat">
+          <ClothesButton active={!!clothes.head} onClick={() => onSetClothes('head')} title={clothesLabels?.hat ?? 'Hat'}>
             <FaHatCowboy size={18} />
-            <span>Hat</span>
+            <span>{clothesLabels?.hat ?? 'Hat'}</span>
           </ClothesButton>
-          <ClothesButton active={!!clothes.body} onClick={() => onSetClothes('body')} title="Toggle torso">
+          <ClothesButton active={!!clothes.body} onClick={() => onSetClothes('body')} title={clothesLabels?.torso ?? 'Torso'}>
             <FaTshirt size={18} />
-            <span>Torso</span>
+            <span>{clothesLabels?.torso ?? 'Torso'}</span>
           </ClothesButton>
-          <ClothesButton active={!!clothes.bottom} onClick={() => onSetClothes('bottom')} title="Toggle pants">
+          <ClothesButton active={!!clothes.bottom} onClick={() => onSetClothes('bottom')} title={clothesLabels?.pants ?? 'Pants'}>
             <GiTrousers size={18} />
-            <span>Pants</span>
+            <span>{clothesLabels?.pants ?? 'Pants'}</span>
           </ClothesButton>
         </ClothesSection>
       )}

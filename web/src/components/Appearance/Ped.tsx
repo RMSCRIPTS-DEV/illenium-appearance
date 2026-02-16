@@ -19,10 +19,11 @@ const Ped = ({ settings, storedData, data, handleModelChange }: PedProps) => {
     return null;
   }
 
+  const l = locales.ped;
   return (
-    <Item title="Ped" defaultOpen>
+    <Item title={l.title} defaultOpen>
       <SelectInput
-        title="Custom Ped"
+        title={l.model}
         items={settings.model.items}
         defaultValue={data}
         clientValue={storedData}

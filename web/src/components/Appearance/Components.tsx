@@ -49,12 +49,13 @@ const Components = ({
     return null;
   }
 
+  const l = locales.components;
   return (
     <>
       {componentConfig.jackets && (
-        <Item title="Jacket">
+        <Item title={l.jackets}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[11].drawable.min}
             max={settingsById[11].drawable.max}
             blacklisted={settingsById[11].blacklist.drawables}
@@ -63,7 +64,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(11, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[11].texture.min}
             max={settingsById[11].texture.max}
             blacklisted={settingsById[11].blacklist.textures}
@@ -74,9 +75,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.shirts && (
-        <Item title="Undershirt">
+        <Item title={l.shirt}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[8].drawable.min}
             max={settingsById[8].drawable.max}
             blacklisted={settingsById[8].blacklist.drawables}
@@ -85,7 +86,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(8, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[8].texture.min}
             max={settingsById[8].texture.max}
             blacklisted={settingsById[8].blacklist.textures}
@@ -96,9 +97,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.upperBody && (
-        <Item title="Arms & Gloves">
+        <Item title={l.upperBody}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[3].drawable.min}
             max={settingsById[3].drawable.max}
             blacklisted={settingsById[3].blacklist.drawables}
@@ -107,7 +108,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(3, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[3].texture.min}
             max={settingsById[3].texture.max}
             blacklisted={settingsById[3].blacklist.textures}
@@ -118,9 +119,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.lowerBody && (
-        <Item title="Pants">
+        <Item title={l.lowerBody}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[4].drawable.min}
             max={settingsById[4].drawable.max}
             blacklisted={settingsById[4].blacklist.drawables}
@@ -129,7 +130,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(4, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[4].texture.min}
             max={settingsById[4].texture.max}
             blacklisted={settingsById[4].blacklist.textures}
@@ -140,9 +141,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.shoes && (
-        <Item title="Shoes">
+        <Item title={l.shoes}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[6].drawable.min}
             max={settingsById[6].drawable.max}
             blacklisted={settingsById[6].blacklist.drawables}
@@ -151,7 +152,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(6, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[6].texture.min}
             max={settingsById[6].texture.max}
             blacklisted={settingsById[6].blacklist.textures}
@@ -162,9 +163,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.decals && (
-        <Item title="Decals">
+        <Item title={l.decals}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[10].drawable.min}
             max={settingsById[10].drawable.max}
             blacklisted={settingsById[10].blacklist.drawables}
@@ -173,7 +174,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(10, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[10].texture.min}
             max={settingsById[10].texture.max}
             blacklisted={settingsById[10].blacklist.textures}
@@ -184,9 +185,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.masks && (
-        <Item title="Mask">
+        <Item title={l.mask}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[1].drawable.min}
             max={settingsById[1].drawable.max}
             blacklisted={settingsById[1].blacklist.drawables}
@@ -195,7 +196,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(1, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[1].texture.min}
             max={settingsById[1].texture.max}
             blacklisted={settingsById[1].blacklist.textures}
@@ -206,9 +207,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.bodyArmor && (
-        <Item title="Body Armor">
+        <Item title={l.bodyArmor}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[9].drawable.min}
             max={settingsById[9].drawable.max}
             blacklisted={settingsById[9].blacklist.drawables}
@@ -217,7 +218,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(9, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[9].texture.min}
             max={settingsById[9].texture.max}
             blacklisted={settingsById[9].blacklist.textures}
@@ -228,9 +229,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.bags && (
-        <Item title="Bags">
+        <Item title={l.bags}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[5].drawable.min}
             max={settingsById[5].drawable.max}
             blacklisted={settingsById[5].blacklist.drawables}
@@ -239,7 +240,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(5, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[5].texture.min}
             max={settingsById[5].texture.max}
             blacklisted={settingsById[5].blacklist.textures}
@@ -250,9 +251,9 @@ const Components = ({
         </Item>
       )}
       {componentConfig.scarfAndChains && !hasTracker && (
-        <Item title="Scarf & Chains">
+        <Item title={l.scarfAndChains}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[7].drawable.min}
             max={settingsById[7].drawable.max}
             blacklisted={settingsById[7].blacklist.drawables}
@@ -261,7 +262,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(7, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[7].texture.min}
             max={settingsById[7].texture.max}
             blacklisted={settingsById[7].blacklist.textures}
@@ -272,9 +273,9 @@ const Components = ({
         </Item>
       )}
       {!isPedFreemodeModel && (
-        <Item title="Head">
+        <Item title={l.head}>
           <Input
-            title="Component"
+            title={l.drawable}
             min={settingsById[0].drawable.min}
             max={settingsById[0].drawable.max}
             blacklisted={settingsById[0].blacklist.drawables}
@@ -283,7 +284,7 @@ const Components = ({
             onChange={value => handleComponentDrawableChange(0, value)}
           />
           <Input
-            title="Variant"
+            title={l.texture}
             min={settingsById[0].texture.min}
             max={settingsById[0].texture.max}
             blacklisted={settingsById[0].blacklist.textures}

@@ -59,6 +59,15 @@ const NuiStateProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     if (isDev && !data.locales) {
       setLocales({
+        header: { title: 'Appearance Editor', subtitle: 'Customize your character' },
+        sidebar: {
+          ped: 'Characters', headBlend: 'Face', faceFeatures: 'Features', headOverlays: 'Skin',
+          hair: 'Hair', makeup: 'Makeup', tattoos: 'Tattoos', components: 'Clothing', props: 'Accessories',
+          clothes: { hat: 'Hat', torso: 'Torso', pants: 'Pants' },
+        },
+        camera: { head: 'Head', torso: 'Torso', legs: 'Legs' },
+        footer: { cancel: 'Cancel', save: 'Save' },
+        controls: { rotateLeft: 'Rotate Left', rotateRight: 'Rotate Right' },
         ped: { title: 'Ped', model: 'Model' },
         headBlend: {
           title: 'Head Blend',

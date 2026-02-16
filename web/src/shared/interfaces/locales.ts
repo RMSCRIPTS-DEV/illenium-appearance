@@ -1,4 +1,20 @@
 export default interface Locales {
+  header?: { title: string; subtitle: string };
+  sidebar?: {
+    ped?: string;
+    headBlend?: string;
+    faceFeatures?: string;
+    headOverlays?: string;
+    hair?: string;
+    makeup?: string;
+    tattoos?: string;
+    components?: string;
+    props?: string;
+    clothes?: { hat: string; torso: string; pants: string };
+  };
+  camera?: { head: string; torso: string; legs: string };
+  footer?: { cancel: string; save: string };
+  controls?: { rotateLeft: string; rotateRight: string };
   modal: {
     save: {
       title: string;

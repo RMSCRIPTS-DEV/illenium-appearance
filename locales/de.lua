@@ -1,5 +1,38 @@
 Locales["de"] = {
     UI = {
+        header = {
+            title = "Erscheinungs-Editor",
+            subtitle = "Passe deinen Charakter an"
+        },
+        sidebar = {
+            ped = "Charaktere",
+            headBlend = "Gesicht",
+            faceFeatures = "Merkmale",
+            headOverlays = "Haut",
+            hair = "Haare",
+            makeup = "Make-up",
+            tattoos = "Tattoos",
+            components = "Kleidung",
+            props = "Accessoires",
+            clothes = {
+                hat = "Hut",
+                torso = "Oberkörper",
+                pants = "Hose"
+            }
+        },
+        camera = {
+            head = "Kopf",
+            torso = "Oberkörper",
+            legs = "Beine"
+        },
+        footer = {
+            cancel = "Abbrechen",
+            save = "Speichern"
+        },
+        controls = {
+            rotateLeft = "Links drehen",
+            rotateRight = "Rechts drehen"
+        },
         modal = {
             save = {
                 title = "Anpassungen speichern",

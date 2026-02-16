@@ -20,11 +20,12 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
     return null;
   }
 
+  const hb = locales.headBlend;
   return (
     <>
-      <Item title="Face Shape (Base)">
+      <Item title={hb.shape.title}>
         <Input
-          title="Mother"
+          title={hb.shape.firstOption}
           min={settings.shapeFirst.min}
           max={settings.shapeFirst.max}
           defaultValue={data.shapeFirst}
@@ -32,7 +33,7 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('shapeFirst', value)}
         />
         <Input
-          title="Father"
+          title={hb.shape.secondOption}
           min={settings.shapeSecond.min}
           max={settings.shapeSecond.max}
           defaultValue={data.shapeSecond}
@@ -40,7 +41,7 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('shapeSecond', value)}
         />
         <RangeInput
-          title="Mix"
+          title={hb.shape.mix}
           min={settings.shapeMix.min}
           max={settings.shapeMix.max}
           factor={settings.shapeMix.factor}
@@ -48,9 +49,9 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('shapeMix', value)}
         />
       </Item>
-      <Item title="Skin Tone (Base)">
+      <Item title={hb.skin.title}>
         <Input
-          title="Mother"
+          title={hb.skin.firstOption}
           min={settings.skinFirst.min}
           max={settings.skinFirst.max}
           defaultValue={data.skinFirst}
@@ -58,7 +59,7 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('skinFirst', value)}
         />
         <Input
-          title="Father"
+          title={hb.skin.secondOption}
           min={settings.skinSecond.min}
           max={settings.skinSecond.max}
           defaultValue={data.skinSecond}
@@ -66,7 +67,7 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('skinSecond', value)}
         />
         <RangeInput
-          title="Mix"
+          title={hb.skin.mix}
           min={settings.skinMix.min}
           max={settings.skinMix.max}
           factor={settings.skinMix.factor}
@@ -74,9 +75,9 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('skinMix', value)}
         />
       </Item>
-      <Item title="Race (Base)">
+      <Item title={hb.race.title}>
         <Input
-          title="Shape"
+          title={hb.race.shape}
           min={settings.shapeThird.min}
           max={settings.shapeThird.max}
           defaultValue={data.shapeThird}
@@ -84,7 +85,7 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('shapeThird', value)}
         />
         <Input
-          title="Skin"
+          title={hb.race.skin}
           min={settings.skinThird.min}
           max={settings.skinThird.max}
           defaultValue={data.skinThird}
@@ -92,7 +93,7 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('skinThird', value)}
         />
         <RangeInput
-          title="Mix"
+          title={hb.race.mix}
           min={settings.thirdMix.min}
           max={settings.thirdMix.max}
           factor={settings.thirdMix.factor}

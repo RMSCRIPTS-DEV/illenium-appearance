@@ -689,6 +689,15 @@ const Appearance = () => {
 
   // Dev mode fallback locales
   const DEV_LOCALES = {
+    header: { title: 'Appearance Editor', subtitle: 'Customize your character' },
+    sidebar: {
+      ped: 'Characters', headBlend: 'Face', faceFeatures: 'Features', headOverlays: 'Skin',
+      hair: 'Hair', makeup: 'Makeup', tattoos: 'Tattoos', components: 'Clothing', props: 'Accessories',
+      clothes: { hat: 'Hat', torso: 'Torso', pants: 'Pants' },
+    },
+    camera: { head: 'Head', torso: 'Torso', legs: 'Legs' },
+    footer: { cancel: 'Cancel', save: 'Save' },
+    controls: { rotateLeft: 'Rotate Left', rotateRight: 'Rotate Right' },
     ped: { title: 'Ped', model: 'Model' },
     headBlend: {
       title: 'Head Blend',
@@ -728,7 +737,7 @@ const Appearance = () => {
     tattoos: {
       title: 'Tattoos',
       items: { ZONE_HEAD: 'Head', ZONE_TORSO: 'Torso', ZONE_LEFT_ARM: 'Left Arm', ZONE_RIGHT_ARM: 'Right Arm', ZONE_LEFT_LEG: 'Left Leg', ZONE_RIGHT_LEG: 'Right Leg' },
-      apply: 'Apply', delete: 'Delete', deleteAll: 'Delete All',
+      apply: 'Apply', delete: 'Delete', deleteAll: 'Delete All', opacity: 'Opacity',
     },
     modal: {
       save: { title: 'Save Changes?', description: 'Do you want to save?' },
@@ -856,37 +865,37 @@ const Appearance = () => {
       <CameraButtons>
         <CameraButton onClick={handleCameraHead} active={activeCamera === 'head'}>
           <IconUser stroke={1.5} />
-          <span>Head</span>
+          <span>{activeLocales.camera?.head ?? 'Head'}</span>
         </CameraButton>
         <CameraButton onClick={handleCameraBody} active={activeCamera === 'body'}>
           <IconShirt stroke={1.5} />
-          <span>Torso</span>
+          <span>{activeLocales.camera?.torso ?? 'Torso'}</span>
         </CameraButton>
         <CameraButton onClick={handleCameraBottom} active={activeCamera === 'bottom'}>
           <IconShoe stroke={1.5} />
-          <span>Legs</span>
+          <span>{activeLocales.camera?.legs ?? 'Legs'}</span>
         </CameraButton>
       </CameraButtons>
       <ControlsInfo>
-        <span><kbd>A</kbd> Rotate Left</span>
+        <span><kbd>A</kbd> {activeLocales.controls?.rotateLeft ?? 'Rotate Left'}</span>
         <ControlsDivider />
-        <span><kbd>D</kbd> Rotate Right</span>
+        <span><kbd>D</kbd> {activeLocales.controls?.rotateRight ?? 'Rotate Right'}</span>
       </ControlsInfo>
       <MainPanel>
         <ContentPanel>
           <Header 
-            title="Appearance Editor" 
-            subtitle="Customize your character" 
+            title={activeLocales.header?.title ?? 'Appearance Editor'} 
+            subtitle={activeLocales.header?.subtitle ?? 'Customize your character'} 
           />
           <Container>
             {renderCategoryContent()}
           </Container>
           <FooterButtons>
             <ActionButton variant="secondary" onClick={handleExitModal}>
-              Cancel
+              {activeLocales.footer?.cancel ?? 'Cancel'}
             </ActionButton>
             <ActionButton variant="primary" onClick={handleSaveModal}>
-              Save
+              {activeLocales.footer?.save ?? 'Save'}
             </ActionButton>
           </FooterButtons>
         </ContentPanel>
@@ -896,6 +905,7 @@ const Appearance = () => {
           config={config}
           clothes={clothes}
           onSetClothes={handleSetClothes}
+          locales={activeLocales}
         />
       </MainPanel>
     </Wrapper>
