@@ -266,9 +266,13 @@ constants.DATA_CLOTHES = {
         },
         props = {
             male = {
-                {0, -1}
+                {0, -1},
+                {1, -1}
             },
-            female = {}
+            female = {
+                {0, -1},
+                {1, -1}
+            }
         }
     },
     body = {
