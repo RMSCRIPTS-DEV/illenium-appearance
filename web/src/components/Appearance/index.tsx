@@ -687,6 +687,22 @@ const Appearance = () => {
     }
   }, [display.appearance]);
 
+  // When config loads (e.g. barber shop), auto-select first available category if current has no content
+  useEffect(() => {
+    if (!config) return;
+    const categoryOrder = ['ped', 'headBlend', 'faceFeatures', 'headOverlays', 'hair', 'makeup', 'tattoos', 'components', 'props'] as const;
+    const getCategoryConfigKey = (cat: string) =>
+      (['headOverlays', 'hair', 'makeup'].includes(cat) ? 'headOverlays' : cat) as keyof typeof config;
+    const hasContent = (cat: string) => {
+      const key = getCategoryConfigKey(cat);
+      return config[key] === true;
+    };
+    if (!hasContent(activeCategory)) {
+      const firstAvailable = categoryOrder.find(hasContent);
+      if (firstAvailable) setActiveCategory(firstAvailable);
+    }
+  }, [config, activeCategory]);
+
   // Dev mode fallback locales
   const DEV_LOCALES = {
     header: { title: 'Appearance Editor', subtitle: 'Customize your character' },
@@ -786,6 +802,7 @@ const Appearance = () => {
       case 'makeup':
         return config.headOverlays && (
           <HeadOverlays
+            activeCategory={activeCategory as 'headOverlays' | 'hair' | 'makeup'}
             settings={{
               hair: appearanceSettings.hair,
               headOverlays: appearanceSettings.headOverlays,

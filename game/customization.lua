@@ -29,7 +29,8 @@ end
 client.getAppearance = getAppearance
 
 local function addToBlacklist(item, drawable, drawableId, blacklistSettings)
-    if drawable == drawableId and item.textures then
+    if drawable == nil then return end
+    if drawable == drawableId and item.textures and #item.textures > 0 then
         for i = 1, #item.textures do
             blacklistSettings.textures[#blacklistSettings.textures + 1] = item.textures[i]
         end
@@ -101,8 +102,8 @@ local function filterBlacklistSettings(items, drawableId)
 
     for i = 1, #items do
         local item = items[i]
-        if not allowedForPlayer(item, allowedAces) and item.drawables then
-            for j = 0, #item.drawables do
+        if not allowedForPlayer(item, allowedAces) and item.drawables and #item.drawables > 0 then
+            for j = 1, #item.drawables do
                 addToBlacklist(item, item.drawables[j], drawableId, blacklistSettings)
             end
         end

@@ -22,7 +22,8 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
   const { locales } = useNuiState();
 
   const settingsById = settings.reduce((object, { prop_id, drawable, texture, blacklist }) => {
-    return { ...object, [prop_id]: { drawable, texture, blacklist } };
+    const safeBlacklist = blacklist ?? { drawables: [], textures: [] };
+    return { ...object, [prop_id]: { drawable, texture, blacklist: safeBlacklist } };
   }, {} as DataById<Omit<PropSettings, 'prop_id'>>);
 
   const propsById: any = data.reduce((object, { prop_id, drawable, texture }) => {

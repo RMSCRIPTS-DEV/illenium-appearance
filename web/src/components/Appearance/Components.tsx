@@ -34,7 +34,8 @@ const Components = ({
   const { locales } = useNuiState();
 
   const settingsById = settings.reduce((object, { component_id, drawable, texture, blacklist }) => {
-    return { ...object, [component_id]: { drawable, texture, blacklist } };
+    const safeBlacklist = blacklist ?? { drawables: [], textures: [] };
+    return { ...object, [component_id]: { drawable, texture, blacklist: safeBlacklist } };
   }, {} as DataById<Omit<ComponentSettings, 'component_id'>>);
 
   const componentsById: any = data.reduce((object, { component_id, drawable, texture }) => {

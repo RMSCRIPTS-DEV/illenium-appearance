@@ -16,7 +16,12 @@ import {
 } from './interfaces';
 import { useCallback } from 'react';
 
+/** Category IDs that show head overlays content. Each maps to a subset of items. */
+export type HeadOverlaysCategory = 'headOverlays' | 'hair' | 'makeup';
+
 interface HeadOverlaysProps {
+  /** Currently selected category - filters which items are shown */
+  activeCategory: HeadOverlaysCategory;
   settings: {
     hair: HairSettings;
     headOverlays: HeadOverlaysSettings;
@@ -44,6 +49,7 @@ interface HeadOverlaysProps {
 }
 
 const HeadOverlays = ({
+  activeCategory,
   settings,
   storedData,
   data,
@@ -73,12 +79,13 @@ const HeadOverlays = ({
   const ho = locales.headOverlays;
   return (
     <>
+      {activeCategory === 'hair' && (
       <Item title={ho.hair.title} defaultOpen>
         <Input
           title={ho.hair.style}
           min={settings.hair.style.min}
           max={settings.hair.style.max}
-          blacklisted={settings.hair.blacklist.drawables}
+          blacklisted={settings.hair.blacklist?.drawables ?? []}
           defaultValue={data.hair.style}
           clientValue={storedData.hair.style}
           onChange={value => handleHairChange('style', value)}
@@ -87,7 +94,7 @@ const HeadOverlays = ({
           title={ho.hair.texture}
           min={settings.hair.texture.min}
           max={settings.hair.texture.max}
-          blacklisted={settings.hair.blacklist.textures}
+          blacklisted={settings.hair.blacklist?.textures ?? []}
           defaultValue={data.hair.texture}
           clientValue={storedData.hair.texture}
           onChange={value => handleHairChange('texture', value)}
@@ -120,7 +127,8 @@ const HeadOverlays = ({
           </>
         )}
       </Item>
-      {isPedFreemodeModel && (
+      )}
+      {activeCategory === 'makeup' && isPedFreemodeModel && (
         <>
           <Item title={ho.eyebrows}>
             <RangeInput
@@ -239,6 +247,9 @@ const HeadOverlays = ({
               onChange={value => handleHeadOverlayChange('lipstick', 'color', value)}
             />
           </Item>
+        </>
+      )}
+      {activeCategory === 'hair' && isPedFreemodeModel && (
           <Item title={ho.beard}>
             <RangeInput
               title={ho.opacity}
@@ -264,6 +275,9 @@ const HeadOverlays = ({
               onChange={value => handleHeadOverlayChange('beard', 'color', value)}
             />
           </Item>
+      )}
+      {activeCategory === 'headOverlays' && isPedFreemodeModel && (
+        <>
           <Item title={ho.blemishes}>
             <RangeInput
               title={ho.opacity}
@@ -354,6 +368,27 @@ const HeadOverlays = ({
               onChange={value => handleHeadOverlayChange('moleAndFreckles', 'style', value)}
             />
           </Item>
+          <Item title={ho.bodyBlemishes}>
+            <RangeInput
+              title={ho.opacity}
+              min={settings.headOverlays.bodyBlemishes.opacity.min}
+              max={settings.headOverlays.bodyBlemishes.opacity.max}
+              factor={settings.headOverlays.bodyBlemishes.opacity.factor}
+              defaultValue={data.headOverlays.bodyBlemishes.opacity}
+              onChange={value => handleHeadOverlayChange('bodyBlemishes', 'opacity', value)}
+            />
+            <Input
+              title={ho.style}
+              min={settings.headOverlays.bodyBlemishes.style.min}
+              max={settings.headOverlays.bodyBlemishes.style.max}
+              defaultValue={data.headOverlays.bodyBlemishes.style}
+              clientValue={storedData.headOverlays.bodyBlemishes.style}
+              onChange={value => handleHeadOverlayChange('bodyBlemishes', 'style', value)}
+            />
+          </Item>
+        </>
+      )}
+      {activeCategory === 'hair' && isPedFreemodeModel && (
           <Item title={ho.chestHair}>
             <RangeInput
               title={ho.opacity}
@@ -379,25 +414,6 @@ const HeadOverlays = ({
               onChange={value => handleHeadOverlayChange('chestHair', 'color', value)}
             />
           </Item>
-          <Item title={ho.bodyBlemishes}>
-            <RangeInput
-              title={ho.opacity}
-              min={settings.headOverlays.bodyBlemishes.opacity.min}
-              max={settings.headOverlays.bodyBlemishes.opacity.max}
-              factor={settings.headOverlays.bodyBlemishes.opacity.factor}
-              defaultValue={data.headOverlays.bodyBlemishes.opacity}
-              onChange={value => handleHeadOverlayChange('bodyBlemishes', 'opacity', value)}
-            />
-            <Input
-              title={ho.style}
-              min={settings.headOverlays.bodyBlemishes.style.min}
-              max={settings.headOverlays.bodyBlemishes.style.max}
-              defaultValue={data.headOverlays.bodyBlemishes.style}
-              clientValue={storedData.headOverlays.bodyBlemishes.style}
-              onChange={value => handleHeadOverlayChange('bodyBlemishes', 'style', value)}
-            />
-          </Item>
-        </>
       )}
     </>
   );
