@@ -2,8 +2,8 @@
 
 A modern UI redesign of the popular illenium-appearance clothing system for FiveM.
 
-<div align='center'>
-  <img src="https://i.imgur.com/gWTKrvu.jpeg" alt="RM Scripts UI Redesign Preview" />
+<div align='center'> 
+  <img src="https://i.imgur.com/az2HLF4.png" alt="RM Scripts UI Redesign Preview" />
 </div>
 
 ## 🎨 About This Project
@@ -45,3 +45,4 @@ Maintains the same open-source license as the original illenium-appearance.
   <p>⭐ Star this repo if you find it useful!</p>
   <p>🛒 <a href="https://rm-scripts.dev">Visit Our Store</a> | 💬 <a href="https://discord.com/invite/JuKgfmbCpQ">Join Our Discord</a></p>
 </div>
+
