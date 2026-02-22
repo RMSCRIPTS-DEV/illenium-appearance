@@ -42,20 +42,20 @@ const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
 
 const SidebarContainer = styled.div`
   width: 72px;
-  height: calc(100% - 20px);
+  height: 100%;
+  align-self: stretch;
   background: #1A1B1E;
   border: 1px solid #2C2E33;
   border-radius: 12px;
-  margin: 10px 10px 10px 8px;
+  margin: 0 10px 0 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px 0;
-  gap: 4px;
   overflow-y: auto;
-  justify-content: flex-start;
   box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
   position: relative;
+  box-sizing: border-box;
 
   &::before {
     content: '';
@@ -75,7 +75,10 @@ const SidebarContainer = styled.div`
     z-index: 1;
   }
 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
+    display: none;
     width: 0;
   }
 `;
@@ -124,8 +127,18 @@ const SidebarItem = styled.button<SidebarItemProps>`
   }
 `;
 
+const SidebarCategories = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  min-height: 0;
+`;
+
 const ClothesSection = styled.div`
-  margin-top: auto;
+  flex-shrink: 0;
   padding-top: 8px;
   border-top: 1px solid #2C2E33;
   display: flex;
@@ -204,19 +217,21 @@ const Sidebar: React.FC<SidebarProps> = ({ activeCategory, onCategoryChange, con
 
   return (
     <SidebarContainer>
-      {categories.map((category) => {
-        const Icon = category.icon;
-        return (
-          <SidebarItem
-            key={category.id}
-            active={activeCategory === category.id}
-            onClick={() => onCategoryChange(category.id)}
-          >
-            <Icon stroke={1.5} />
-            <span>{getLabel(category.labelKey)}</span>
-          </SidebarItem>
-        );
-      })}
+      <SidebarCategories>
+        {categories.map((category) => {
+          const Icon = category.icon;
+          return (
+            <SidebarItem
+              key={category.id}
+              active={activeCategory === category.id}
+              onClick={() => onCategoryChange(category.id)}
+            >
+              <Icon stroke={1.5} />
+              <span>{getLabel(category.labelKey)}</span>
+            </SidebarItem>
+          );
+        })}
+      </SidebarCategories>
       {clothes && onSetClothes && (
         <ClothesSection>
           <ClothesButton active={!!clothes.head} onClick={() => onSetClothes('head')} title={clothesLabels?.hat ?? 'Hat'}>

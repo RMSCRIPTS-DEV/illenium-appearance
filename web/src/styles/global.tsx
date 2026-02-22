@@ -17,8 +17,8 @@ export default createGlobalStyle<{theme: any}>`
     box-sizing: border-box;
     outline: 0;
     user-select: none;
-    scrollbar-width: thin;
-    scrollbar-color: #373A40 #101113;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
   
   body {
@@ -54,22 +54,13 @@ export default createGlobalStyle<{theme: any}>`
   }
 
   ::-webkit-scrollbar {
-    width: 2px;
-    height: 6px;
+    display: none;
+    width: 0;
+    height: 0;
   }
 
-  ::-webkit-scrollbar-track {
-    background: #101113;
-    border-radius: 4px;
-  }
-
+  ::-webkit-scrollbar-track,
   ::-webkit-scrollbar-thumb {
-    background: #373A40;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4dabf7;
+    display: none;
   }
 `;

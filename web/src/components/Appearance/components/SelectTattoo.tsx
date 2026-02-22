@@ -1,11 +1,27 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import styled, { ThemeContext, createGlobalStyle } from 'styled-components';
 import Select from 'react-select';
 import { useNuiState } from '../../../hooks/nuiState';
-import Button from './Button';
 import { Tattoo } from '../interfaces';
 import RangeInput from './RangeInput';
 import { TattoosSettings } from '../interfaces';
+import { ActionButton } from '../styles';
+
+/* Force tattoo dropdown options to dark theme (no light blue) */
+const TattooSelectGlobalStyles = createGlobalStyle`
+  [class*="TattooDropdown"][class*="__option"] {
+    background-color: transparent !important;
+    color: #C1C2C5 !important;
+  }
+  [class*="TattooDropdown"][class*="__option--is-focused"] {
+    background-color: #25262b !important;
+    color: #C1C2C5 !important;
+  }
+  [class*="TattooDropdown"][class*="__option--is-selected"] {
+    background-color: #2C2E33 !important;
+    color: #C1C2C5 !important;
+  }
+`;
 
 interface SelectTattooProps {
   items: Tattoo[];
@@ -17,30 +33,34 @@ interface SelectTattooProps {
 }
 
 const Container = styled.div`
+  width: 100%;
   min-width: 0;
-
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 10px;
+  gap: 16px;
+`;
 
-  > section {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
+const ActionRow = styled.div`
+  display: flex;
+  gap: 8px;
+  width: 100%;
 `;
 
 const customStyles: any = {
   control: (styles: any) => ({
     ...styles,
-    marginTop: '10px',
+    marginTop: 0,
+    width: '100%',
+    minWidth: 0,
     background: '#1A1B1E',
-    fontSize: '14px',
+    fontSize: '13px',
     color: '#C1C2C5',
     border: '1px solid #2C2E33',
+    borderRadius: '8px',
     outline: 'none',
     boxShadow: 'none',
+    minHeight: '40px',
   }),
   placeholder: (styles: any) => ({
     ...styles,
@@ -72,15 +92,16 @@ const customStyles: any = {
   menuPortal: (styles: any) => ({
     ...styles,
     color: '#C1C2C5',
-    zIndex: 9999,
+    zIndex: 10050,
   }),
   menu: (styles: any) => ({
     ...styles,
     background: '#1A1B1E',
     position: 'absolute',
     marginBottom: '10px',
-    borderRadius: '4px',
+    borderRadius: '8px',
     border: '1px solid #2C2E33',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
   }),
   menuList: (styles: any) => ({
     ...styles,
@@ -103,8 +124,9 @@ const customStyles: any = {
     width: '97%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: isSelected ? 'rgba(34, 139, 230, 0.15)' : isFocused ? 'rgba(34, 139, 230, 0.08)' : 'transparent',
-    color: isSelected ? '#4dabf7' : isFocused ? '#4dabf7' : '#A6A7AB',
+    backgroundColor: isSelected ? '#2C2E33' : isFocused ? '#25262b' : 'transparent',
+    color: '#C1C2C5',
+    cursor: 'pointer',
     fontFamily: 'Nexa-Book, sans-serif',
   }),
 };
@@ -187,6 +209,7 @@ const SelectTattoo = ({
 
   return (
     <Container>
+      <TattooSelectGlobalStyles />
       <Select
         ref={selectRef}
         styles={customStyles}
@@ -200,20 +223,25 @@ const SelectTattoo = ({
         menuShouldScrollIntoView={true}
       />
       <RangeInput
-              title={locales.tattoos.opacity}
-              min={settings.opacity.min}
-              max={settings.opacity.max}
-              factor={settings.opacity.factor}
-              defaultValue={opacity}
-              clientValue={clientOpacity}
-              onChange={value => handleChangeOpacity(value)} />
-      <section>
+        title={locales.tattoos.opacity}
+        min={settings.opacity.min}
+        max={settings.opacity.max}
+        factor={settings.opacity.factor}
+        defaultValue={opacity}
+        clientValue={clientOpacity}
+        onChange={value => handleChangeOpacity(value)}
+      />
+      <ActionRow>
         {isTattooApplied ? (
-          <Button onClick={() => handleDeleteTattoo(currentTattoo)}>{locales.tattoos.delete}</Button>
+          <ActionButton variant="secondary" onClick={() => handleDeleteTattoo(currentTattoo)}>
+            {locales.tattoos.delete}
+          </ActionButton>
         ) : (
-          <Button onClick={() => handleApplyTattoo(currentTattoo, opacity)}>{locales.tattoos.apply}</Button>
+          <ActionButton variant="primary" onClick={() => handleApplyTattoo(currentTattoo, opacity)}>
+            {locales.tattoos.apply}
+          </ActionButton>
         )}
-      </section>
+      </ActionRow>
     </Container>
   );
 };

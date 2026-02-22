@@ -39,6 +39,7 @@ import Modal from '../Modal';
 import Tattoos from './Tattoos';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import DevPanel, { type DevStore } from './components/DevPanel';
 
 import { Wrapper, MainPanel, ContentPanel, Container, FooterButtons, ActionButton, CameraButtons, CameraButton, ControlsInfo, ControlsDivider } from './styles';
 import { IconUser, IconShirt, IconShoe } from '@tabler/icons-react';
@@ -78,6 +79,34 @@ const DEV_CONFIG = {
   },
 };
 
+// Dev-only: example tattoo items per zone so tattoos tab has data in pnpm dev
+const DEV_TATTOO_ITEMS: Record<string, { name: string; label: string; hashMale: string; hashFemale: string; zone: string; collection: string }[]> = {
+  ZONE_HEAD: [
+    { name: 'tattoo_head_1', label: 'Skull Front', hashMale: 'mpbeach_overlays', hashFemale: 'mpbeach_overlays', zone: 'ZONE_HEAD', collection: 'mpbeach_overlays' },
+    { name: 'tattoo_head_2', label: 'Tribal Lines', hashMale: 'mpbiker_overlays', hashFemale: 'mpbiker_overlays', zone: 'ZONE_HEAD', collection: 'mpbiker_overlays' },
+    { name: 'tattoo_head_3', label: 'Star', hashMale: 'mpchristmas2_overlays', hashFemale: 'mpchristmas2_overlays', zone: 'ZONE_HEAD', collection: 'mpchristmas2_overlays' },
+  ],
+  ZONE_TORSO: [
+    { name: 'tattoo_torso_1', label: 'Dragon', hashMale: 'mpbeach_overlays', hashFemale: 'mpbeach_overlays', zone: 'ZONE_TORSO', collection: 'mpbeach_overlays' },
+    { name: 'tattoo_torso_2', label: 'Wings', hashMale: 'mpbiker_overlays', hashFemale: 'mpbiker_overlays', zone: 'ZONE_TORSO', collection: 'mpbiker_overlays' },
+    { name: 'tattoo_torso_3', label: 'Chest Script', hashMale: 'mpchristmas2_overlays', hashFemale: 'mpchristmas2_overlays', zone: 'ZONE_TORSO', collection: 'mpchristmas2_overlays' },
+  ],
+  ZONE_LEFT_ARM: [
+    { name: 'tattoo_arm_l_1', label: 'Sleeve Start', hashMale: 'mpbeach_overlays', hashFemale: 'mpbeach_overlays', zone: 'ZONE_LEFT_ARM', collection: 'mpbeach_overlays' },
+    { name: 'tattoo_arm_l_2', label: 'Banded', hashMale: 'mpbiker_overlays', hashFemale: 'mpbiker_overlays', zone: 'ZONE_LEFT_ARM', collection: 'mpbiker_overlays' },
+  ],
+  ZONE_RIGHT_ARM: [
+    { name: 'tattoo_arm_r_1', label: 'Sleeve Start', hashMale: 'mpbeach_overlays', hashFemale: 'mpbeach_overlays', zone: 'ZONE_RIGHT_ARM', collection: 'mpbeach_overlays' },
+    { name: 'tattoo_arm_r_2', label: 'Banded', hashMale: 'mpbiker_overlays', hashFemale: 'mpbiker_overlays', zone: 'ZONE_RIGHT_ARM', collection: 'mpbiker_overlays' },
+  ],
+  ZONE_LEFT_LEG: [
+    { name: 'tattoo_leg_l_1', label: 'Calf', hashMale: 'mpbeach_overlays', hashFemale: 'mpbeach_overlays', zone: 'ZONE_LEFT_LEG', collection: 'mpbeach_overlays' },
+  ],
+  ZONE_RIGHT_LEG: [
+    { name: 'tattoo_leg_r_1', label: 'Calf', hashMale: 'mpbeach_overlays', hashFemale: 'mpbeach_overlays', zone: 'ZONE_RIGHT_LEG', collection: 'mpbeach_overlays' },
+  ],
+};
+
 if (isDev) {
   mock('appearance_get_settings', () => ({
     appearanceSettings: {
@@ -98,6 +127,15 @@ if (isDev) {
             [230, 140, 70], [200, 120, 50], [170, 100, 40], [140, 80, 30],
           ],
         },
+      },
+      tattoos: {
+        ...SETTINGS_INITIAL_STATE.tattoos,
+        items: Object.fromEntries(
+          Object.entries(DEV_TATTOO_ITEMS).map(([zone, arr]) => [
+            zone,
+            arr.map((t) => ({ ...t, opacity: 1 })),
+          ])
+        ),
       },
     },
   }));
@@ -135,11 +173,58 @@ if (isDev) {
   }));
 }
 
+/** Dev-only: config for each store type (which sidebar sections are visible) */
+function getDevStoreConfig(store: DevStore): CustomizationConfig {
+  const base = { ...DEV_CONFIG } as CustomizationConfig;
+  const cfg = { ...base, componentConfig: { ...base.componentConfig }, propConfig: { ...base.propConfig } };
+  switch (store) {
+    case 'barber':
+      cfg.ped = true;
+      cfg.headBlend = true;
+      cfg.faceFeatures = true;
+      cfg.headOverlays = true;
+      cfg.components = false;
+      cfg.props = false;
+      cfg.tattoos = false;
+      break;
+    case 'clothing':
+      cfg.ped = false;
+      cfg.headBlend = false;
+      cfg.faceFeatures = false;
+      cfg.headOverlays = false;
+      cfg.components = true;
+      cfg.props = true;
+      cfg.tattoos = false;
+      break;
+    case 'tattoo':
+      cfg.ped = false;
+      cfg.headBlend = false;
+      cfg.faceFeatures = false;
+      cfg.headOverlays = false;
+      cfg.components = false;
+      cfg.props = false;
+      cfg.tattoos = true;
+      break;
+    default:
+      break;
+  }
+  return cfg;
+}
+
+const DEV_STORE_HEADERS: Record<DevStore, { title: string; subtitle: string }> = {
+  full: { title: 'Appearance Editor', subtitle: 'Customize your character' },
+  barber: { title: 'Barber', subtitle: 'Hair & appearance' },
+  clothing: { title: 'Clothing Store', subtitle: 'Outfit & accessories' },
+  tattoo: { title: 'Tattoo Shop', subtitle: 'Tattoos' },
+};
+
 const Appearance = () => {
   // In dev mode, initialize with mock data immediately
   const [config, setConfig] = useState<CustomizationConfig | undefined>(
     isDev ? DEV_CONFIG as CustomizationConfig : undefined
   );
+
+  const [devStore, setDevStore] = useState<DevStore>('full');
 
   const [data, setData] = useState<PedAppearance | undefined>(
     isDev ? DEV_APPEARANCE_EXAMPLE : undefined
@@ -687,21 +772,31 @@ const Appearance = () => {
     }
   }, [display.appearance]);
 
-  // When config loads (e.g. barber shop), auto-select first available category if current has no content
+  const effectiveConfig = useMemo(() =>
+    !config ? undefined : (isDev ? getDevStoreConfig(devStore) : config),
+    [config, devStore]
+  );
+
+  const handleResetData = useCallback(() => {
+    setData(DEV_APPEARANCE_EXAMPLE);
+    setStoredData(DEV_APPEARANCE_EXAMPLE);
+  }, []);
+
+  // When config loads or dev store changes, auto-select first available category if current has no content
   useEffect(() => {
-    if (!config) return;
+    if (!effectiveConfig) return;
     const categoryOrder = ['ped', 'headBlend', 'faceFeatures', 'headOverlays', 'hair', 'makeup', 'tattoos', 'components', 'props'] as const;
     const getCategoryConfigKey = (cat: string) =>
-      (['headOverlays', 'hair', 'makeup'].includes(cat) ? 'headOverlays' : cat) as keyof typeof config;
+      (['headOverlays', 'hair', 'makeup'].includes(cat) ? 'headOverlays' : cat) as keyof typeof effectiveConfig;
     const hasContent = (cat: string) => {
       const key = getCategoryConfigKey(cat);
-      return config[key] === true;
+      return effectiveConfig[key] === true;
     };
     if (!hasContent(activeCategory)) {
       const firstAvailable = categoryOrder.find(hasContent);
       if (firstAvailable) setActiveCategory(firstAvailable);
     }
-  }, [config, activeCategory]);
+  }, [effectiveConfig, activeCategory]);
 
   // Dev mode fallback locales
   const DEV_LOCALES = {
@@ -753,7 +848,7 @@ const Appearance = () => {
     tattoos: {
       title: 'Tattoos',
       items: { ZONE_HEAD: 'Head', ZONE_TORSO: 'Torso', ZONE_LEFT_ARM: 'Left Arm', ZONE_RIGHT_ARM: 'Right Arm', ZONE_LEFT_LEG: 'Left Leg', ZONE_RIGHT_LEG: 'Right Leg' },
-      apply: 'Apply', delete: 'Delete', deleteAll: 'Delete All', opacity: 'Opacity',
+      apply: 'Get Tattoo', delete: 'Remove', deleteAll: 'Remove All', opacity: 'Opacity', done: 'Done',
     },
     modal: {
       save: { title: 'Save Changes?', description: 'Do you want to save?' },
@@ -769,9 +864,10 @@ const Appearance = () => {
   }
 
   const renderCategoryContent = () => {
+    const cfg = effectiveConfig ?? config;
     switch (activeCategory) {
       case 'ped':
-        return config.ped && (
+        return cfg.ped && (
           <Ped
             settings={appearanceSettings.ped}
             storedData={storedData.model}
@@ -780,7 +876,7 @@ const Appearance = () => {
           />
         );
       case 'headBlend':
-        return isPedFreemodeModel && config.headBlend && (
+        return isPedFreemodeModel && cfg.headBlend && (
           <HeadBlend
             settings={appearanceSettings.headBlend}
             storedData={storedData.headBlend}
@@ -789,7 +885,7 @@ const Appearance = () => {
           />
         );
       case 'faceFeatures':
-        return isPedFreemodeModel && config.faceFeatures && (
+        return isPedFreemodeModel && cfg.faceFeatures && (
           <FaceFeatures
             settings={appearanceSettings.faceFeatures}
             storedData={storedData.faceFeatures}
@@ -800,7 +896,7 @@ const Appearance = () => {
       case 'headOverlays':
       case 'hair':
       case 'makeup':
-        return config.headOverlays && (
+        return cfg.headOverlays && (
           <HeadOverlays
             activeCategory={activeCategory as 'headOverlays' | 'hair' | 'makeup'}
             settings={{
@@ -830,31 +926,31 @@ const Appearance = () => {
           />
         );
       case 'components':
-        return config.components && (
+        return cfg.components && (
           <Components
             settings={appearanceSettings.components}
             data={data.components}
             storedData={storedData.components}
             handleComponentDrawableChange={handleComponentDrawableChange}
             handleComponentTextureChange={handleComponentTextureChange}
-            componentConfig={config.componentConfig}
+            componentConfig={cfg.componentConfig}
             hasTracker={config.hasTracker}
             isPedFreemodeModel={isPedFreemodeModel}
           />
         );
       case 'props':
-        return config.props && (
+        return cfg.props && (
           <Props
             settings={appearanceSettings.props}
             data={data.props}
             storedData={storedData.props}
             handlePropDrawableChange={handlePropDrawableChange}
             handlePropTextureChange={handlePropTextureChange}
-            propConfig={config.propConfig}
+            propConfig={cfg.propConfig}
           />
         );
       case 'tattoos':
-        return isPedFreemodeModel && config.tattoos && (
+        return isPedFreemodeModel && cfg.tattoos && (
           <Tattoos
             settings={filterTattoos(appearanceSettings.tattoos)}
             data={data.tattoos}
@@ -898,11 +994,19 @@ const Appearance = () => {
         <ControlsDivider />
         <span><kbd>D</kbd> {activeLocales.controls?.rotateRight ?? 'Rotate Right'}</span>
       </ControlsInfo>
+      {isDev && (
+        <DevPanel
+          store={devStore}
+          onStoreChange={setDevStore}
+          onLoadExampleData={fetchData}
+          onResetData={handleResetData}
+        />
+      )}
       <MainPanel>
         <ContentPanel>
           <Header 
-            title={activeLocales.header?.title ?? 'Appearance Editor'} 
-            subtitle={activeLocales.header?.subtitle ?? 'Customize your character'} 
+            title={isDev ? DEV_STORE_HEADERS[devStore].title : (activeLocales.header?.title ?? 'Appearance Editor')} 
+            subtitle={isDev ? DEV_STORE_HEADERS[devStore].subtitle : (activeLocales.header?.subtitle ?? 'Customize your character')} 
           />
           <Container>
             {renderCategoryContent()}
@@ -919,7 +1023,7 @@ const Appearance = () => {
         <Sidebar 
           activeCategory={activeCategory} 
           onCategoryChange={setActiveCategory}
-          config={config}
+          config={effectiveConfig ?? config}
           clothes={clothes}
           onSetClothes={handleSetClothes}
           locales={activeLocales}

@@ -26,15 +26,7 @@ const Header = styled.button<HeaderProps>`
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: background 0.2s ease;
   font-family: 'Nexa-Book', sans-serif;
-  
-  &:hover {
-    background: #25262b;
-    
-    span { color: #4dabf7; }
-    svg { color: #74c0fc; }
-  }
   
   span {
     font-size: 12px;

@@ -1,11 +1,8 @@
 import { useNuiState } from '../../hooks/nuiState';
-import Section from './components/Section';
-import Item from './components/Item';
-import { Container, FlexWrapper } from './styles';
+import { ActionButton, TattoosLayout, TattoosScrollArea, TattoosBottomBar, TattoosTitle, TattoosZoneBlock, TattoosZoneLabel } from './styles';
 import SelectTattoo from './components/SelectTattoo';
 
 import { TattoosSettings, TattooList, Tattoo } from './interfaces';
-import Button from './components/Button';
 
 interface TattoosProps {
   settings: TattoosSettings;
@@ -21,19 +18,19 @@ const Tattoos = ({ settings, data, storedData, handleApplyTattoo, handlePreviewT
   const { locales } = useNuiState();
 
   const { items } = settings;
-  const keys = Object.keys(items);
+  const keys = Object.keys(items).filter(key => key !== 'ZONE_HAIR');
 
   if (!locales) {
     return null;
   }
 
   return (
-    <Section title={locales.tattoos.title}>
-      {keys.map(key => (
-        key !== 'ZONE_HAIR' 
-        && 
-        <Item key={key} title={locales.tattoos.items[key]}>
-          <FlexWrapper>
+    <TattoosLayout>
+      <TattoosScrollArea>
+        <TattoosTitle>{locales.tattoos.title}</TattoosTitle>
+        {keys.map(key => (
+          <TattoosZoneBlock key={key}>
+            <TattoosZoneLabel>{locales.tattoos.items[key]}</TattoosZoneLabel>
             <SelectTattoo
               handlePreviewTattoo={handlePreviewTattoo}
               handleApplyTattoo={handleApplyTattoo}
@@ -42,15 +39,15 @@ const Tattoos = ({ settings, data, storedData, handleApplyTattoo, handlePreviewT
               tattoosApplied={data[key] ?? null}
               settings={settings}
             />
-          </FlexWrapper>
-        </Item>
-      ))}
-      <Item>
-      <FlexWrapper>
-          <Button onClick={() => handleClearTattoos()} width="100%">{locales.tattoos.deleteAll}</Button>
-      </FlexWrapper>
-      </Item>
-    </Section>
+          </TattoosZoneBlock>
+        ))}
+      </TattoosScrollArea>
+      <TattoosBottomBar>
+        <ActionButton variant="primary" onClick={() => handleClearTattoos()} style={{ width: '100%' }}>
+          {locales.tattoos.deleteAll}
+        </ActionButton>
+      </TattoosBottomBar>
+    </TattoosLayout>
   );
 };
 

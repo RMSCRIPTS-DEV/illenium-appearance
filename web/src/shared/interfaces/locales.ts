@@ -159,5 +159,6 @@ export default interface Locales {
     delete: string;
     deleteAll: string;
     opacity: string;
+    done?: string;
   };
 }

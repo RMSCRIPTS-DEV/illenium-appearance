@@ -10,6 +10,8 @@ const ACCENT_BLUE_HOVER = '#74c0fc';
 const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
 
 export const Wrapper = styled.div`
+  position: relative;
+  z-index: 1000;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -24,23 +26,37 @@ export const Wrapper = styled.div`
   }
 `;
 
+const PANEL_HEIGHT = 'calc(100vh - 24px)';
+
 export const MainPanel = styled.div`
   display: flex;
-  height: 100%;
+  align-items: flex-start;
+  gap: 8px;
+  height: ${PANEL_HEIGHT};
+  max-height: ${PANEL_HEIGHT};
+  margin: 12px 12px 12px 0;
+  box-sizing: border-box;
+  overflow: hidden;
 `;
 
 export const ContentPanel = styled.div`
   display: flex;
   flex-direction: column;
   width: 300px;
-  height: calc(100% - 20px);
+  min-width: 300px;
+  height: ${PANEL_HEIGHT};
+  max-height: ${PANEL_HEIGHT};
+  min-height: 0;
+  flex-shrink: 0;
   background: #1A1B1E;
   border: 1px solid #2C2E33;
   border-radius: 12px;
-  margin: 10px 0;
   box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
   position: relative;
+  z-index: 1;
   overflow: hidden;
+  isolation: isolate;
+  box-sizing: border-box;
 
   &::before {
     content: '';
@@ -62,7 +78,8 @@ export const ContentPanel = styled.div`
 `;
 
 export const Header = styled.div`
-  padding: 16px;
+  padding: 16px 16px 14px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -108,6 +125,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  min-height: 0;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -131,7 +149,8 @@ export const Container = styled.div`
 export const FooterButtons = styled.div`
   display: flex;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 16px 16px 20px;
+  flex-shrink: 0;
   background: #141517;
   border-top: 1px solid #2C2E33;
 `;
@@ -183,17 +202,20 @@ export const ActionButton = styled.button<ActionButtonProps>`
 
 export const Sidebar = styled.div`
   width: 72px;
-  height: calc(100% - 20px);
+  flex-shrink: 0;
+  height: ${PANEL_HEIGHT};
+  max-height: ${PANEL_HEIGHT};
+  min-height: 0;
   background: #1A1B1E;
   border: 1px solid #2C2E33;
   border-radius: 12px;
-  margin: 10px 10px 10px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0;
+  padding: 16px 0 16px 0;
   gap: 4px;
   overflow-y: auto;
+  box-sizing: border-box;
   box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
   position: relative;
 
@@ -388,6 +410,93 @@ export const FlexWrapper = styled.div`
   > div {
     flex: 1;
   }
+`;
+
+/* Card-style block for tattoo (and similar) content - matches clothing Item content */
+export const CardBlock = styled.div`
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #25262b;
+  border: 1px solid #2C2E33;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background-color: #2C2E33;
+    border-color: #373A40;
+  }
+`;
+
+export const CardActionRow = styled.div`
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin-top: 4px;
+`;
+
+/* Full-height layout for tattoos: scrollable list + Remove all pinned at bottom */
+export const TattoosLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+`;
+
+export const TattoosTitle = styled.div`
+  padding: 14px 16px;
+  border-bottom: 1px solid #2C2E33;
+  font-size: 13px;
+  font-weight: 600;
+  color: #C1C2C5;
+  font-family: 'Nexa-Book', sans-serif;
+`;
+
+export const TattoosZoneBlock = styled.div`
+  padding: 12px 16px 16px;
+  border-bottom: 1px solid #2C2E33;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+`;
+
+export const TattoosZoneLabel = styled.div`
+  font-size: 11px;
+  font-weight: 500;
+  color: #909296;
+  margin-bottom: 10px;
+  font-family: 'Nexa-Book', sans-serif;
+`;
+
+export const TattoosScrollArea = styled.div`
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #101113;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #373A40;
+    border-radius: 4px;
+  }
+`;
+
+/* Same as FooterButtons - no card, matches main panel footer */
+export const TattoosBottomBar = styled.div`
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  padding: 16px 16px 20px;
+  background: #141517;
+  border-top: 1px solid #2C2E33;
 `;
 
 export const CameraButtons = styled.div`
