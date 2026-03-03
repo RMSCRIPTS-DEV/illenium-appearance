@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IconBuildingStore, IconScissors, IconShirt, IconWriting, IconDatabase, IconRefresh } from '@tabler/icons-react';
+import { vp } from '../../../styles/scale';
 
 export type DevStore = 'full' | 'barber' | 'clothing' | 'tattoo';
 
@@ -9,50 +10,50 @@ const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
 
 const Panel = styled.div`
   position: fixed;
-  left: 12px;
+  left: ${vp(12)};
   top: 50%;
   transform: translateY(-50%);
   z-index: 1001;
-  width: 140px;
-  padding: 12px;
+  width: ${vp(140)};
+  padding: ${vp(12)};
   background: #1A1B1E;
   border: 1px solid #2C2E33;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: ${vp(12)};
+  box-shadow: 0 ${vp(4)} ${vp(20)} rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${vp(8)};
   font-family: 'Nexa-Book', sans-serif;
 `;
 
 const Label = styled.div`
-  font-size: 10px;
+  font-size: ${vp(10)};
   font-weight: 600;
   color: #909296;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 2px;
+  margin-bottom: ${vp(2)};
 `;
 
 const Button = styled.button<{ active?: boolean }>`
   width: 100%;
-  padding: 8px 10px;
+  padding: ${vp(8)} ${vp(10)};
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${vp(8)};
   background: ${({ active }) => (active ? ACCENT_BLUE_LIGHT : 'rgba(255, 255, 255, 0.05)')};
   border: 1px solid ${({ active }) => (active ? ACCENT_BLUE : '#2C2E33')};
-  border-radius: 6px;
+  border-radius: ${vp(6)};
   color: ${({ active }) => (active ? ACCENT_BLUE : '#C1C2C5')};
-  font-size: 11px;
+  font-size: ${vp(11)};
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: 'Nexa-Book', sans-serif;
 
   svg {
-    width: 14px;
-    height: 14px;
+    width: ${vp(14)};
+    height: ${vp(14)};
     flex-shrink: 0;
   }
 
@@ -64,7 +65,7 @@ const Button = styled.button<{ active?: boolean }>`
 `;
 
 const Divider = styled.div`
-  height: 1px;
+  height: ${vp(1)};
   background: #2C2E33;
   margin: 4px 0;
 `;

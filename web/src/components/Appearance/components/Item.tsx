@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, ReactNode } from 'react';
 import { IconChevronDown } from '@tabler/icons-react';
+import { vp } from '../../../styles/scale';
 
 interface ItemProps {
   title?: string;
@@ -19,7 +20,7 @@ interface HeaderProps {
 
 const Header = styled.button<HeaderProps>`
   width: 100%;
-  padding: 12px 16px;
+  padding: ${vp(12)} ${vp(16)};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,14 +30,14 @@ const Header = styled.button<HeaderProps>`
   font-family: 'Nexa-Book', sans-serif;
   
   span {
-    font-size: 12px;
+    font-size: ${vp(12)};
     font-weight: 500;
     color: #C1C2C5;
   }
   
   svg {
-    width: 14px;
-    height: 14px;
+    width: ${vp(14)};
+    height: ${vp(14)};
     color: #4dabf7;
     transition: transform 0.25s ease;
     transform: ${({ expanded }) => expanded ? 'rotate(180deg)' : 'rotate(0)'};
@@ -44,10 +45,10 @@ const Header = styled.button<HeaderProps>`
 `;
 
 const Content = styled.div`
-  padding: 16px 16px 18px;
+  padding: ${vp(16)} ${vp(16)} ${vp(18)};
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: ${vp(16)};
 `;
 
 const Item: React.FC<ItemProps> = ({ children, title, defaultOpen = false }) => {

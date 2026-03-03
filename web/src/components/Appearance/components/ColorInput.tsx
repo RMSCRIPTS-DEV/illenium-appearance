@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import styled from 'styled-components';
+import { vp } from '../../../styles/scale';
 
 interface ColorInputProps {
   title?: string;
@@ -17,11 +18,11 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${vp(8)};
 `;
 
 const Label = styled.span`
-  font-size: 11px;
+  font-size: ${vp(11)};
   color: #909296;
   font-weight: 500;
 `;
@@ -29,17 +30,17 @@ const Label = styled.span`
 const ColorsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  padding: 10px;
+  gap: ${vp(5)};
+  padding: ${vp(10)};
   background-color: #25262b;
   border: 1px solid #373A40;
-  border-radius: 6px;
+  border-radius: ${vp(6)};
 `;
 
 const ColorButton = styled.button<ButtonProps>`
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
+  width: ${vp(22)};
+  height: ${vp(22)};
+  border-radius: ${vp(4)};
   border: 2px solid ${({ selected }) => selected ? '#4dabf7' : '#373A40'};
   cursor: pointer;
   transition: all 0.2s ease;

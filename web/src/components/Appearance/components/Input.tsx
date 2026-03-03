@@ -1,5 +1,6 @@
 import { useCallback, useRef } from 'react';
 import styled from 'styled-components';
+import { vp } from '../../../styles/scale';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 
 interface InputProps {
@@ -16,11 +17,11 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: ${vp(10)};
 `;
 
 const Label = styled.span`
-  font-size: 11px;
+  font-size: ${vp(11)};
   color: #909296;
   font-weight: 500;
 `;
@@ -30,7 +31,7 @@ const InputWrapper = styled.div`
   align-items: center;
   background-color: #25262b;
   border: 1px solid #373A40;
-  border-radius: 6px;
+  border-radius: ${vp(6)};
   overflow: hidden;
   transition: all 0.15s ease;
   
@@ -41,8 +42,8 @@ const InputWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  width: 32px;
-  height: 32px;
+  width: ${vp(32)};
+  height: ${vp(32)};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,8 +53,8 @@ const Button = styled.button`
   transition: all 0.2s ease;
   
   svg {
-    width: 12px;
-    height: 12px;
+    width: ${vp(12)};
+    height: ${vp(12)};
     color: #5c5f66;
     transition: color 0.2s ease;
   }
@@ -84,14 +85,14 @@ const Button = styled.button`
 const ValueInput = styled.input`
   flex: 1;
   text-align: center;
-  font-size: 12px;
+  font-size: ${vp(12)};
   color: #C1C2C5;
   font-weight: 500;
-  min-width: 50px;
+  min-width: ${vp(50)};
   background: transparent;
   border: none;
   outline: none;
-  height: 32px;
+  height: ${vp(32)};
   font-family: 'Nexa-Book', sans-serif;
   
   &::-webkit-outer-spin-button,

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { IconChevronDown, IconSearch } from '@tabler/icons-react';
+import { vp } from '../../../styles/scale';
 
 interface SelectInputProps {
   title: string;
@@ -14,11 +15,11 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${vp(8)};
 `;
 
 const Label = styled.span`
-  font-size: 11px;
+  font-size: ${vp(11)};
   color: #909296;
   font-weight: 500;
   text-transform: uppercase;
@@ -26,7 +27,7 @@ const Label = styled.span`
 
 const SelectButton = styled.button<{ isOpen: boolean }>`
   width: 100%;
-  padding: 10px 12px;
+  padding: ${vp(10)} ${vp(12)};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,13 +39,13 @@ const SelectButton = styled.button<{ isOpen: boolean }>`
   font-family: 'Nexa-Book', sans-serif;
   
   span {
-    font-size: 12px;
+    font-size: ${vp(12)};
     color: #C1C2C5;
   }
   
   svg {
-    width: 14px;
-    height: 14px;
+    width: ${vp(14)};
+    height: ${vp(14)};
     color: #4dabf7;
     transition: transform 0.25s ease;
     transform: ${({ isOpen }) => isOpen ? 'rotate(180deg)' : 'rotate(0)'};
@@ -61,29 +62,29 @@ const SelectButton = styled.button<{ isOpen: boolean }>`
 const Dropdown = styled.div`
   width: 100%;
   background: #1A1B1E;
-  border-radius: 8px;
+  border-radius: ${vp(8)};
   overflow: hidden;
   border: 1px solid #2C2E33;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 ${vp(10)} ${vp(40)} rgba(0, 0, 0, 0.5);
 `;
 
 const SearchWrapper = styled.div`
-  padding: 10px;
+  padding: ${vp(10)};
   border-bottom: 1px solid #2C2E33;
 `;
 
 const SearchInput = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  gap: ${vp(10)};
+  padding: ${vp(8)} ${vp(12)};
   background-color: #25262b;
   border: 1px solid #373A40;
   border-radius: 6px;
   
   svg {
-    width: 14px;
-    height: 14px;
+    width: ${vp(14)};
+    height: ${vp(14)};
     color: #5c5f66;
   }
   
@@ -92,7 +93,7 @@ const SearchInput = styled.div`
     background: transparent;
     border: none;
     outline: none;
-    font-size: 12px;
+    font-size: ${vp(12)};
     color: #C1C2C5;
     font-family: 'Nexa-Book', sans-serif;
     
@@ -108,12 +109,12 @@ const SearchInput = styled.div`
 `;
 
 const OptionsList = styled.div`
-  max-height: 200px;
+  max-height: ${vp(200)};
   overflow-y: auto;
-  padding: 6px;
+  padding: ${vp(6)};
   
   &::-webkit-scrollbar {
-    width: 4px;
+    width: ${vp(4)};
   }
   
   &::-webkit-scrollbar-track {
@@ -129,13 +130,13 @@ const OptionsList = styled.div`
 
 const Option = styled.button<{ isSelected: boolean }>`
   width: 100%;
-  padding: 8px 10px;
+  padding: ${vp(8)} ${vp(10)};
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: ${vp(10)};
   background: ${({ isSelected }) => isSelected ? 'rgba(34, 139, 230, 0.15)' : 'transparent'};
   border: 1px solid ${({ isSelected }) => isSelected ? '#4dabf7' : 'transparent'};
-  border-radius: 6px;
+  border-radius: ${vp(6)};
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: left;
@@ -148,9 +149,9 @@ const Option = styled.button<{ isSelected: boolean }>`
 `;
 
 const OptionIcon = styled.div`
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: ${vp(28)};
+  height: ${vp(28)};
+  border-radius: ${vp(6)};
   background: #25262b;
   border: 1px solid #373A40;
   display: flex;
@@ -169,7 +170,7 @@ const OptionIcon = styled.div`
 `;
 
 const OptionLabel = styled.span`
-  font-size: 12px;
+  font-size: ${vp(12)};
   color: #C1C2C5;
 `;
 

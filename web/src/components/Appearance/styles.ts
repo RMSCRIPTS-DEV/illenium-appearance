@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { vp } from '../../styles/scale';
 
 /* Thomas boilerplate theme - dark grayscale + Mantine light blue accent
  * dark[0]: #C1C2C5, dark[1]: #A6A7AB, dark[2]: #909296, dark[3]: #5c5f66
@@ -26,15 +27,15 @@ export const Wrapper = styled.div`
   }
 `;
 
-const PANEL_HEIGHT = 'calc(100vh - 24px)';
+const PANEL_HEIGHT = `calc(100vh - ${vp(24)})`;
 
 export const MainPanel = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: ${vp(8)};
   height: ${PANEL_HEIGHT};
   max-height: ${PANEL_HEIGHT};
-  margin: 12px 12px 12px 0;
+  margin: ${vp(12)} ${vp(12)} ${vp(12)} 0;
   box-sizing: border-box;
   overflow: hidden;
 `;
@@ -42,16 +43,16 @@ export const MainPanel = styled.div`
 export const ContentPanel = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
-  min-width: 300px;
+  width: ${vp(300)};
+  min-width: ${vp(300)};
   height: ${PANEL_HEIGHT};
   max-height: ${PANEL_HEIGHT};
   min-height: 0;
   flex-shrink: 0;
   background: #1A1B1E;
   border: 1px solid #2C2E33;
-  border-radius: 12px;
-  box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
+  border-radius: ${vp(12)};
+  box-shadow: ${vp(10)} 0 ${vp(40)} rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -78,28 +79,28 @@ export const ContentPanel = styled.div`
 `;
 
 export const Header = styled.div`
-  padding: 16px 16px 14px;
+  padding: ${vp(16)} ${vp(16)} ${vp(14)};
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: ${vp(12)};
   border-bottom: 1px solid #2C2E33;
 `;
 
 export const HeaderIcon = styled.div`
-  width: 40px;
-  height: 40px;
+  width: ${vp(40)};
+  height: ${vp(40)};
   display: flex;
   align-items: center;
   justify-content: center;
   background: #25262b;
   border: 1px solid #373A40;
-  border-radius: 8px;
+  border-radius: ${vp(8)};
   
   svg {
     color: ${ACCENT_BLUE};
-    width: 20px;
-    height: 20px;
+    width: ${vp(20)};
+    height: ${vp(20)};
   }
 `;
 
@@ -107,14 +108,14 @@ export const HeaderText = styled.div`
   flex: 1;
   
   h1 {
-    font-size: 14px;
+    font-size: ${vp(14)};
     font-weight: 600;
     color: #C1C2C5;
-    margin: 0 0 2px 0;
+    margin: 0 0 ${vp(2)} 0;
   }
   
   p {
-    font-size: 11px;
+    font-size: ${vp(11)};
     color: #909296;
     margin: 0;
   }
@@ -148,8 +149,8 @@ export const Container = styled.div`
 
 export const FooterButtons = styled.div`
   display: flex;
-  gap: 8px;
-  padding: 16px 16px 20px;
+  gap: ${vp(8)};
+  padding: ${vp(16)} ${vp(16)} ${vp(20)};
   flex-shrink: 0;
   background: #141517;
   border-top: 1px solid #2C2E33;
@@ -162,9 +163,9 @@ interface ActionButtonProps {
 /* Same light blue style as Hat/Torso/Pants - light tint + blue border */
 export const ActionButton = styled.button<ActionButtonProps>`
   flex: 1;
-  padding: 8px 14px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: ${vp(8)} ${vp(14)};
+  border-radius: ${vp(4)};
+  font-size: ${vp(12)};
   font-weight: 600;
   font-family: 'Nexa-Book', sans-serif;
   cursor: pointer;
@@ -201,19 +202,19 @@ export const ActionButton = styled.button<ActionButtonProps>`
 `;
 
 export const Sidebar = styled.div`
-  width: 72px;
+  width: ${vp(72)};
   flex-shrink: 0;
   height: ${PANEL_HEIGHT};
   max-height: ${PANEL_HEIGHT};
   min-height: 0;
   background: #1A1B1E;
   border: 1px solid #2C2E33;
-  border-radius: 12px;
+  border-radius: ${vp(12)};
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 0 16px 0;
-  gap: 4px;
+  padding: ${vp(16)} 0 ${vp(16)} 0;
+  gap: ${vp(4)};
   overflow-y: auto;
   box-sizing: border-box;
   box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
@@ -225,7 +226,7 @@ export const Sidebar = styled.div`
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    border-radius: 12px;
+    border-radius: ${vp(12)};
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 128px 128px;
@@ -247,14 +248,14 @@ interface SidebarItemProps {
 }
 
 export const SidebarItem = styled.button<SidebarItemProps>`
-  width: 56px;
-  height: 56px;
+  width: ${vp(56)};
+  height: ${vp(56)};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  border-radius: 8px;
+  gap: ${vp(4)};
+  border-radius: ${vp(8)};
   cursor: pointer;
   transition: all 0.2s ease;
   background: ${({ active }) => active ? ACCENT_BLUE_LIGHT : 'transparent'};
@@ -262,14 +263,14 @@ export const SidebarItem = styled.button<SidebarItemProps>`
   box-shadow: ${({ active }) => active ? '0 0 0 1px rgba(34, 139, 230, 0.2)' : 'none'};
   
   svg {
-    width: 18px;
-    height: 18px;
+    width: ${vp(18)};
+    height: ${vp(18)};
     color: ${({ active }) => active ? ACCENT_BLUE : '#5c5f66'};
     transition: color 0.2s ease;
   }
   
   span {
-    font-size: 9px;
+    font-size: ${vp(9)};
     font-weight: 500;
     color: ${({ active }) => active ? '#C1C2C5' : '#5c5f66'};
     transition: color 0.2s ease;
@@ -299,7 +300,7 @@ interface SectionHeaderProps {
 
 export const SectionHeader = styled.button<SectionHeaderProps>`
   width: 100%;
-  padding: 12px 16px;
+  padding: ${vp(12)} ${vp(16)};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -316,15 +317,15 @@ export const SectionHeader = styled.button<SectionHeaderProps>`
   }
   
   span {
-    font-size: 12px;
+    font-size: ${vp(12)};
     font-weight: 500;
     color: #C1C2C5;
     transition: color 0.2s ease;
   }
   
   svg {
-    width: 14px;
-    height: 14px;
+    width: ${vp(14)};
+    height: ${vp(14)};
     color: #909296;
     transition: transform 0.25s ease, color 0.2s ease;
     transform: ${({ expanded }) => expanded ? 'rotate(180deg)' : 'rotate(0)'};
@@ -332,20 +333,20 @@ export const SectionHeader = styled.button<SectionHeaderProps>`
 `;
 
 export const SectionContent = styled.div`
-  padding: 16px 16px 18px;
+  padding: ${vp(16)} ${vp(16)} ${vp(18)};
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: ${vp(16)};
 `;
 
 export const ControlRow = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: ${vp(6)};
 `;
 
 export const ControlLabel = styled.label`
-  font-size: 11px;
+  font-size: ${vp(11)};
   color: #909296;
   font-weight: 500;
   font-family: 'Nexa-Book', sans-serif;
@@ -356,7 +357,7 @@ export const NumberInput = styled.div`
   align-items: center;
   background-color: #25262b;
   border: 1px solid #373A40;
-  border-radius: 6px;
+  border-radius: ${vp(6)};
   overflow: hidden;
   transition: all 0.15s ease;
   
@@ -367,8 +368,8 @@ export const NumberInput = styled.div`
 `;
 
 export const NumberButton = styled.button`
-  width: 32px;
-  height: 32px;
+  width: ${vp(32)};
+  height: ${vp(32)};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -379,8 +380,8 @@ export const NumberButton = styled.button`
   font-family: 'Nexa-Book', sans-serif;
   
   svg {
-    width: 12px;
-    height: 12px;
+    width: ${vp(12)};
+    height: ${vp(12)};
     color: #5c5f66;
   }
   
@@ -396,7 +397,7 @@ export const NumberButton = styled.button`
 export const NumberValue = styled.span`
   flex: 1;
   text-align: center;
-  font-size: 12px;
+  font-size: ${vp(12)};
   color: #C1C2C5;
   font-weight: 500;
   font-family: 'Nexa-Book', sans-serif;
@@ -405,7 +406,7 @@ export const NumberValue = styled.span`
 export const FlexWrapper = styled.div`
   width: 100%;
   display: flex;
-  gap: 8px;
+  gap: ${vp(8)};
 
   > div {
     flex: 1;
@@ -415,13 +416,13 @@ export const FlexWrapper = styled.div`
 /* Card-style block for tattoo (and similar) content - matches clothing Item content */
 export const CardBlock = styled.div`
   width: 100%;
-  padding: 14px 16px;
+  padding: ${vp(14)} ${vp(16)};
   background-color: #25262b;
   border: 1px solid #2C2E33;
-  border-radius: 8px;
+  border-radius: ${vp(8)};
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: ${vp(14)};
   transition: background-color 0.2s ease, border-color 0.2s ease;
 
   &:hover {
@@ -432,9 +433,9 @@ export const CardBlock = styled.div`
 
 export const CardActionRow = styled.div`
   display: flex;
-  gap: 8px;
+  gap: ${vp(8)};
   width: 100%;
-  margin-top: 4px;
+  margin-top: ${vp(4)};
 `;
 
 /* Full-height layout for tattoos: scrollable list + Remove all pinned at bottom */
@@ -446,16 +447,16 @@ export const TattoosLayout = styled.div`
 `;
 
 export const TattoosTitle = styled.div`
-  padding: 14px 16px;
+  padding: ${vp(14)} ${vp(16)};
   border-bottom: 1px solid #2C2E33;
-  font-size: 13px;
+  font-size: ${vp(13)};
   font-weight: 600;
   color: #C1C2C5;
   font-family: 'Nexa-Book', sans-serif;
 `;
 
 export const TattoosZoneBlock = styled.div`
-  padding: 12px 16px 16px;
+  padding: ${vp(12)} ${vp(16)} ${vp(16)};
   border-bottom: 1px solid #2C2E33;
 
   &:last-of-type {
@@ -464,10 +465,10 @@ export const TattoosZoneBlock = styled.div`
 `;
 
 export const TattoosZoneLabel = styled.div`
-  font-size: 11px;
+  font-size: ${vp(11)};
   font-weight: 500;
   color: #909296;
-  margin-bottom: 10px;
+  margin-bottom: ${vp(10)};
   font-family: 'Nexa-Book', sans-serif;
 `;
 
@@ -493,25 +494,25 @@ export const TattoosScrollArea = styled.div`
 export const TattoosBottomBar = styled.div`
   flex-shrink: 0;
   display: flex;
-  gap: 8px;
-  padding: 16px 16px 20px;
+  gap: ${vp(8)};
+  padding: ${vp(16)} ${vp(16)} ${vp(20)};
   background: #141517;
   border-top: 1px solid #2C2E33;
 `;
 
 export const CameraButtons = styled.div`
   position: fixed;
-  top: 20px;
+  top: ${vp(20)};
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  padding: 12px;
+  gap: ${vp(10)};
+  padding: ${vp(12)};
   background: #1A1B1E;
   border: 1px solid #2C2E33;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: ${vp(12)};
+  box-shadow: 0 ${vp(4)} ${vp(20)} rgba(0, 0, 0, 0.5);
   z-index: 100;
 `;
 
@@ -521,29 +522,29 @@ interface CameraButtonProps {
 
 /* Same light blue style as Hat/Torso/Pants sidebar buttons */
 export const CameraButton = styled.button<CameraButtonProps>`
-  width: 50px;
-  height: 50px;
+  width: ${vp(50)};
+  height: ${vp(50)};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: ${vp(4)};
   background-color: ${({ active }) => active ? ACCENT_BLUE_LIGHT : 'rgba(255, 255, 255, 0.05)'};
   border: ${({ active }) => active ? `1px solid ${ACCENT_BLUE}` : '1px solid rgba(255, 255, 255, 0.1)'};
-  border-radius: 4px;
+  border-radius: ${vp(4)};
   cursor: pointer;
   transition: all 0.15s ease;
   font-family: 'Nexa-Book', sans-serif;
   
   svg {
-    width: 20px;
-    height: 20px;
+    width: ${vp(20)};
+    height: ${vp(20)};
     color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
     transition: color 0.15s ease;
   }
   
   span {
-    font-size: 8px;
+    font-size: ${vp(8)};
     font-weight: 600;
     color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
     text-transform: uppercase;
@@ -568,20 +569,20 @@ export const CameraButton = styled.button<CameraButtonProps>`
 export const ControlsInfo = styled.div`
   position: fixed;
   left: 50%;
-  bottom: 20px;
+  bottom: ${vp(20)};
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 20px;
+  gap: ${vp(20)};
   background: #1A1B1E;
   border: 1px solid #2C2E33;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: ${vp(8)};
+  padding: ${vp(10)} ${vp(20)};
   z-index: 100;
   
   span {
-    font-size: 11px;
+    font-size: ${vp(11)};
     color: #909296;
     display: flex;
     align-items: center;
@@ -592,13 +593,13 @@ export const ControlsInfo = styled.div`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 22px;
-    height: 22px;
-    padding: 0 6px;
+    min-width: ${vp(22)};
+    height: ${vp(22)};
+    padding: 0 ${vp(6)};
     background: #25262b;
     border: 1px solid #373A40;
-    border-radius: 4px;
-    font-size: 11px;
+    border-radius: ${vp(4)};
+    font-size: ${vp(11)};
     font-weight: 600;
     color: ${ACCENT_BLUE};
     font-family: 'Nexa-Book', sans-serif;

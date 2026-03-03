@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import { IconChevronDown } from '@tabler/icons-react';
 import { useSpring, animated } from 'react-spring';
+import { vp } from '../../../styles/scale';
 
 interface SectionProps {
   title: string;
@@ -22,7 +23,7 @@ interface HeaderProps {
 
 const Header = styled.button<HeaderProps>`
   width: 100%;
-  padding: 14px 16px;
+  padding: ${vp(14)} ${vp(16)};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,14 +41,14 @@ const Header = styled.button<HeaderProps>`
   }
   
   span {
-    font-size: 13px;
+    font-size: ${vp(13)};
     font-weight: 500;
     color: #C1C2C5;
   }
   
   svg {
-    width: 16px;
-    height: 16px;
+    width: ${vp(16)};
+    height: ${vp(16)};
     color: #4dabf7;
     transition: transform 0.25s ease;
     transform: ${({ expanded }) => expanded ? 'rotate(180deg)' : 'rotate(0)'};
@@ -55,10 +56,10 @@ const Header = styled.button<HeaderProps>`
 `;
 
 const Content = styled.div`
-  padding: 0 16px 16px;
+  padding: 0 ${vp(16)} ${vp(16)};
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: ${vp(12)};
 `;
 
 const Section: React.FC<SectionProps> = ({ children, title, deps = [], defaultOpen = false }) => {

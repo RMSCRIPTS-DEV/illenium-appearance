@@ -15,6 +15,7 @@ import { FaHatCowboy, FaTshirt } from 'react-icons/fa';
 import { GiTrousers } from 'react-icons/gi';
 import { ClothesState } from '../interfaces';
 import Locales from '../../../shared/interfaces/locales';
+import { vp } from '../../../styles/scale';
 
 interface SidebarConfig {
   ped?: boolean;
@@ -41,17 +42,17 @@ const ACCENT_BLUE_HOVER = '#74c0fc';
 const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
 
 const SidebarContainer = styled.div`
-  width: 72px;
+  width: ${vp(72)};
   height: 100%;
   align-self: stretch;
   background: #1A1B1E;
   border: 1px solid #2C2E33;
-  border-radius: 12px;
-  margin: 0 10px 0 8px;
+  border-radius: ${vp(12)};
+  margin: 0 ${vp(10)} 0 ${vp(8)};
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0;
+  padding: ${vp(10)} 0;
   overflow-y: auto;
   box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
   position: relative;
@@ -89,28 +90,28 @@ interface SidebarItemProps {
 
 /* Same light blue style as Hat/Torso/Pants buttons - light tint + blue border when active */
 const SidebarItem = styled.button<SidebarItemProps>`
-  width: 56px;
-  height: 56px;
+  width: ${vp(56)};
+  height: ${vp(56)};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  border-radius: 4px;
+  gap: ${vp(4)};
+  border-radius: ${vp(4)};
   cursor: pointer;
   transition: all 0.2s ease;
   background: ${({ active }) => active ? ACCENT_BLUE_LIGHT : 'rgba(255, 255, 255, 0.05)'};
   border: ${({ active }) => active ? `1px solid ${ACCENT_BLUE}` : '1px solid rgba(255, 255, 255, 0.1)'};
   
   svg {
-    width: 18px;
-    height: 18px;
+    width: ${vp(18)};
+    height: ${vp(18)};
     color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
     transition: color 0.2s ease;
   }
   
   span {
-    font-size: 9px;
+    font-size: ${vp(9)};
     font-weight: 500;
     color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
     transition: color 0.2s ease;
@@ -133,18 +134,18 @@ const SidebarCategories = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 4px;
+  gap: ${vp(4)};
   min-height: 0;
 `;
 
 const ClothesSection = styled.div`
   flex-shrink: 0;
-  padding-top: 8px;
+  padding-top: ${vp(8)};
   border-top: 1px solid #2C2E33;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: ${vp(4)};
 `;
 
 interface ClothesButtonProps {
@@ -152,13 +153,13 @@ interface ClothesButtonProps {
 }
 
 const ClothesButton = styled.button<ClothesButtonProps>`
-  width: 56px;
-  height: 56px;
+  width: ${vp(56)};
+  height: ${vp(56)};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: ${vp(4)};
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -166,13 +167,13 @@ const ClothesButton = styled.button<ClothesButtonProps>`
   border: ${({ active }) => active ? `1px solid ${ACCENT_BLUE}` : '1px solid rgba(255, 255, 255, 0.1)'};
   
   svg {
-    width: 18px;
-    height: 18px;
+    width: ${vp(18)};
+    height: ${vp(18)};
     color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
   }
   
   span {
-    font-size: 9px;
+    font-size: ${vp(9)};
     font-weight: 500;
     color: ${({ active }) => active ? ACCENT_BLUE : '#909296'};
     font-family: 'Nexa-Book', sans-serif;

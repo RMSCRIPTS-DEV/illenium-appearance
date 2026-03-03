@@ -17,6 +17,7 @@ import {
 import { GiClothes } from 'react-icons/gi';
 
 import { CameraState, ClothesState, RotateState } from './interfaces';
+import { vp } from '../../styles/scale';
 
 interface ToggleButtonProps {
   active: boolean;
@@ -59,18 +60,19 @@ const Container = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 
-  padding: 40px 0;
+  padding: ${vp(40)} 0;
 
   > * {
     & + * {
       margin-top: 10px;
+      margin-top: ${vp(10)};
     }
   }
 `;
 
 const ToggleButton = styled.button<ToggleButtonProps>`
-  height: 40px;
-  width: 40px;
+  height: ${vp(40)};
+  width: ${vp(40)};
 
   display: flex;
   align-items: center;
@@ -112,8 +114,8 @@ const ToggleButton = styled.button<ToggleButtonProps>`
 `;
 
 const Option = styled.button`
-  height: 40px;
-  width: 40px;
+  height: ${vp(40)};
+  width: ${vp(40)};
 
   position: relative;
 
@@ -148,7 +150,7 @@ const Option = styled.button`
 `;
 
 const ExtendedContainer = styled.div<ExtendendContainerProps>`
-  height: 40px;
+  height: ${vp(40)};
 
   display: flex;
   align-items: flex-start;
@@ -162,8 +164,8 @@ const ExtendedContainer = styled.div<ExtendendContainerProps>`
 `;
 
 const ExtendedIcon = styled.div`
-  height: 40px;
-  width: 40px;
+  height: ${vp(40)};
+  width: ${vp(40)};
 
   display: flex;
   align-items: center;
@@ -188,6 +190,7 @@ const ExtendedChildren = styled.div`
   > * {
     & + * {
       margin-left: 10px;
+      margin-left: ${vp(10)};
     }
   }
 `;

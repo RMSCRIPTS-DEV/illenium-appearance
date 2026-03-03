@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { vp } from '../../../styles/scale';
 
 interface ButtonProps {
   children: string | ReactNode;
@@ -10,20 +11,20 @@ interface ButtonProps {
 
 /* rm-billing Pay button style: small, colored, radius sm */
 const CustomButton = styled.span<ButtonProps>`
-  padding: 6px 12px;
+  padding: ${vp(6)} ${vp(12)};
   margin: ${props => props?.margin || "0px"};
   width: ${props => props?.width || "auto"};
-  font-size: 12px;
+  font-size: ${vp(12)};
   font-weight: 600;
   color: #ffffff;
   background-color: #4dabf7;
   border: none;
   text-align: center;
-  border-radius: 4px;
+  border-radius: ${vp(4)};
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: ${vp(5)};
   font-family: 'Nexa-Book', sans-serif;
   cursor: pointer;
   transition: all 0.2s ease;

@@ -6,6 +6,7 @@ import { Tattoo } from '../interfaces';
 import RangeInput from './RangeInput';
 import { TattoosSettings } from '../interfaces';
 import { ActionButton } from '../styles';
+import { vp } from '../../../styles/scale';
 
 /* Force tattoo dropdown options to dark theme (no light blue) */
 const TattooSelectGlobalStyles = createGlobalStyle`
@@ -38,12 +39,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 16px;
+  gap: ${vp(16)};
 `;
 
 const ActionRow = styled.div`
   display: flex;
-  gap: 8px;
+  gap: ${vp(8)};
   width: 100%;
 `;
 

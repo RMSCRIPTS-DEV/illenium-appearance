@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { vp } from '../../styles/scale';
 
 const ACCENT_BLUE = '#4dabf7';
 const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
@@ -19,17 +20,17 @@ export const Wrapper = styled.div`
   font-family: 'Nexa-Book', sans-serif;
 
   p {
-    font-size: 18px;
+    font-size: ${vp(18)};
     font-weight: 600;
     color: #C1C2C5;
-    margin-bottom: 8px;
+    margin-bottom: ${vp(8)};
     font-family: 'Nexa-Book', sans-serif;
   }
 
   span {
-    font-size: 13px;
+    font-size: ${vp(13)};
     color: #909296;
-    margin-bottom: 28px;
+    margin-bottom: ${vp(28)};
     font-family: 'Nexa-Book', sans-serif;
   }
 `;
@@ -37,7 +38,7 @@ export const Wrapper = styled.div`
 /* Same light blue style as Hat/Torso/Pants - light tint + blue border */
 export const Buttons = styled.div`
   display: flex;
-  gap: 12px;
+  gap: ${vp(12)};
 
   button {
     min-width: 100px;

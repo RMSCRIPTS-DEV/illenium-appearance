@@ -1,29 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IconGridDots } from '@tabler/icons-react';
+import { vp } from '../../../styles/scale';
 
 const HeaderWrapper = styled.div`
-  padding: 16px;
+  padding: ${vp(16)};
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: ${vp(12)};
   border-bottom: 1px solid #2C2E33;
 `;
 
 const HeaderIcon = styled.div`
-  width: 40px;
-  height: 40px;
+  width: ${vp(40)};
+  height: ${vp(40)};
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #25262b;
   border: 1px solid #373A40;
-  border-radius: 8px;
+  border-radius: ${vp(8)};
   
   svg {
     color: #4dabf7;
-    width: 20px;
-    height: 20px;
+    width: ${vp(20)};
+    height: ${vp(20)};
   }
 `;
 
@@ -32,7 +33,7 @@ const HeaderText = styled.div`
   font-family: 'Nexa-Book', sans-serif;
   
   h1 {
-    font-size: 14px;
+    font-size: ${vp(14)};
     font-weight: 600;
     color: #C1C2C5;
     margin: 0 0 2px 0;
@@ -40,7 +41,7 @@ const HeaderText = styled.div`
   }
   
   p {
-    font-size: 11px;
+    font-size: ${vp(11)};
     color: #909296;
     margin: 0;
     font-family: 'Nexa-Book', sans-serif;
