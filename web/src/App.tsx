@@ -57,7 +57,10 @@ const App: React.FC = () => {
     }
 
     const themeData = await Nui.post('get_theme_configuration');
-    const nextTheme = getCurrentTheme(themeData) || defaultTheme;
+    const serverTheme = getCurrentTheme(themeData);
+    // Merge server theme over our local defaults so new fields
+    // like accentColor still come from App.tsx if not provided by server.
+    const nextTheme = serverTheme ? { ...defaultTheme, ...serverTheme } : defaultTheme;
     setCurrentTheme(nextTheme);
   }, []);
 
