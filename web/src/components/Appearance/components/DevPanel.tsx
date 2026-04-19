@@ -5,9 +5,6 @@ import { vp } from '../../../styles/scale';
 
 export type DevStore = 'full' | 'barber' | 'clothing' | 'tattoo';
 
-const ACCENT_BLUE = '#4dabf7';
-const ACCENT_BLUE_LIGHT = 'rgba(77, 171, 247, 0.2)';
-
 const Panel = styled.div`
   position: fixed;
   left: ${vp(12)};
@@ -16,8 +13,8 @@ const Panel = styled.div`
   z-index: 1001;
   width: ${vp(140)};
   padding: ${vp(12)};
-  background: #1A1B1E;
-  border: 1px solid #2C2E33;
+  background: ${({ theme }) => `rgb(${theme.primaryBackground || '26, 27, 30'})`};
+  border: 1px solid ${({ theme }) => `rgb(${theme.borderColor || '44, 46, 51'})`};
   border-radius: ${vp(12)};
   box-shadow: 0 ${vp(4)} ${vp(20)} rgba(0, 0, 0, 0.5);
   display: flex;
@@ -29,7 +26,7 @@ const Panel = styled.div`
 const Label = styled.div`
   font-size: ${vp(10)};
   font-weight: 600;
-  color: #909296;
+  color: ${({ theme }) => `rgb(${theme.mutedTextColor || '144, 146, 150'})`};
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: ${vp(2)};
@@ -41,10 +38,18 @@ const Button = styled.button<{ active?: boolean }>`
   display: flex;
   align-items: center;
   gap: ${vp(8)};
-  background: ${({ active }) => (active ? ACCENT_BLUE_LIGHT : 'rgba(255, 255, 255, 0.05)')};
-  border: 1px solid ${({ active }) => (active ? ACCENT_BLUE : '#2C2E33')};
+  background: ${({ active, theme }) =>
+    active ? `rgba(${theme.accentColor || '77, 171, 247'}, 0.2)` : 'rgba(255, 255, 255, 0.05)'};
+  border: 1px solid
+    ${({ active, theme }) =>
+      active
+        ? `rgb(${theme.accentColor || '77, 171, 247'})`
+        : `rgb(${theme.borderColor || '44, 46, 51'})`};
   border-radius: ${vp(6)};
-  color: ${({ active }) => (active ? ACCENT_BLUE : '#C1C2C5')};
+  color: ${({ active, theme }) =>
+    active
+      ? `rgb(${theme.accentColor || '77, 171, 247'})`
+      : `rgb(${theme.fontColor || '193, 194, 197'})`};
   font-size: ${vp(11)};
   font-weight: 500;
   cursor: pointer;
@@ -58,15 +63,16 @@ const Button = styled.button<{ active?: boolean }>`
   }
 
   &:hover {
-    background: ${({ active }) => (active ? ACCENT_BLUE_LIGHT : 'rgba(255, 255, 255, 0.1)')};
-    border-color: ${ACCENT_BLUE};
-    color: ${ACCENT_BLUE};
+    background: ${({ active, theme }) =>
+      active ? `rgba(${theme.accentColor || '77, 171, 247'}, 0.2)` : 'rgba(255, 255, 255, 0.1)'};
+    border-color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`};
+    color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`};
   }
 `;
 
 const Divider = styled.div`
   height: ${vp(1)};
-  background: #2C2E33;
+  background: ${({ theme }) => `rgb(${theme.borderColor || '44, 46, 51'})`};
   margin: 4px 0;
 `;
 

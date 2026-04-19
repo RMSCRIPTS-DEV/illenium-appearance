@@ -9,18 +9,18 @@ import { ActionButton } from '../styles';
 import { vp } from '../../../styles/scale';
 
 /* Force tattoo dropdown options to dark theme (no light blue) */
-const TattooSelectGlobalStyles = createGlobalStyle`
+const TattooSelectGlobalStyles = createGlobalStyle<{ theme: any }>`
   [class*="TattooDropdown"][class*="__option"] {
     background-color: transparent !important;
-    color: #C1C2C5 !important;
+    color: ${({ theme }) => `rgb(${theme.fontColor || '193, 194, 197'})`} !important;
   }
   [class*="TattooDropdown"][class*="__option--is-focused"] {
-    background-color: #25262b !important;
-    color: #C1C2C5 !important;
+    background-color: ${({ theme }) => `rgb(${theme.surfaceBackground || '37, 38, 43'})`} !important;
+    color: ${({ theme }) => `rgb(${theme.fontColor || '193, 194, 197'})`} !important;
   }
   [class*="TattooDropdown"][class*="__option--is-selected"] {
-    background-color: #2C2E33 !important;
-    color: #C1C2C5 !important;
+    background-color: ${({ theme }) => `rgb(${theme.borderColor || '44, 46, 51'})`} !important;
+    color: ${({ theme }) => `rgb(${theme.fontColor || '193, 194, 197'})`} !important;
   }
 `;
 
@@ -48,88 +48,102 @@ const ActionRow = styled.div`
   width: 100%;
 `;
 
-const customStyles: any = {
-  control: (styles: any) => ({
-    ...styles,
-    marginTop: 0,
-    width: '100%',
-    minWidth: 0,
-    background: '#1A1B1E',
-    fontSize: '13px',
-    color: '#C1C2C5',
-    border: '1px solid #2C2E33',
-    borderRadius: '8px',
-    outline: 'none',
-    boxShadow: 'none',
-    minHeight: '40px',
-  }),
-  placeholder: (styles: any) => ({
-    ...styles,
-    fontSize: '14px',
-    color: '#5c5f66',
-  }),
-  input: (styles: any) => ({
-    ...styles,
-    fontSize: '14px',
-    color: '#C1C2C5',
-  }),
-  singleValue: (styles: any) => ({
-    ...styles,
-    fontSize: '14px',
-    color: '#C1C2C5',
-    border: 'none',
-    outline: 'none',
-  }),
-  indicatorContainer: (styles: any) => ({
-    ...styles,
-    borderColor: '#373A40',
-    color: '#4dabf7',
-  }),
-  dropdownIndicator: (styles: any) => ({
-    ...styles,
-    borderColor: '#373A40',
-    color: '#4dabf7',
-  }),
-  menuPortal: (styles: any) => ({
-    ...styles,
-    color: '#C1C2C5',
-    zIndex: 10050,
-  }),
-  menu: (styles: any) => ({
-    ...styles,
-    background: '#1A1B1E',
-    position: 'absolute',
-    marginBottom: '10px',
-    borderRadius: '8px',
-    border: '1px solid #2C2E33',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
-  }),
-  menuList: (styles: any) => ({
-    ...styles,
-    background: '#1A1B1E',
-    borderRadius: '4px',
-    '&::-webkit-scrollbar': {
-      width: '4px',
-    },
-    '&::-webkit-scrollbar-track': {
-      background: '#101113',
-    },
-    '&::-webkit-scrollbar-thumb': {
+const buildCustomStyles = (theme: any): any => {
+  const font = theme?.fontColor ? `rgb(${theme.fontColor})` : '#C1C2C5';
+  const muted = theme?.mutedTextColorSoft ? `rgb(${theme.mutedTextColorSoft})` : '#5c5f66';
+  const bg = theme?.secondaryBackground ? `rgb(${theme.secondaryBackground})` : '#1A1B1E';
+  const surface = theme?.surfaceBackground ? `rgb(${theme.surfaceBackground})` : '#25262b';
+  const border = theme?.borderColor ? `rgb(${theme.borderColor})` : '#2C2E33';
+  const borderSoft = theme?.borderColorSoft ? `rgb(${theme.borderColorSoft})` : '#373A40';
+  const accent = theme?.accentColor ? `rgb(${theme.accentColor})` : '#4dabf7';
+  const scrollbarTrack = theme?.secondaryBackground ? `rgb(${theme.secondaryBackground})` : '#101113';
+
+  return {
+    control: (styles: any) => ({
+      ...styles,
+      marginTop: 0,
+      width: '100%',
+      minWidth: 0,
+      background: bg,
+      backgroundColor: bg,
+      fontSize: '13px',
+      color: font,
+      border: `1px solid ${border}`,
+      borderRadius: '8px',
+      outline: 'none',
+      boxShadow: 'none',
+      minHeight: '40px',
+    }),
+    placeholder: (styles: any) => ({
+      ...styles,
+      fontSize: '14px',
+      color: muted,
+    }),
+    input: (styles: any) => ({
+      ...styles,
+      fontSize: '14px',
+      color: font,
+    }),
+    singleValue: (styles: any) => ({
+      ...styles,
+      fontSize: '14px',
+      color: font,
+      border: 'none',
+      outline: 'none',
+    }),
+    indicatorContainer: (styles: any) => ({
+      ...styles,
+      borderColor: borderSoft,
+      color: accent,
+    }),
+    dropdownIndicator: (styles: any) => ({
+      ...styles,
+      borderColor: borderSoft,
+      color: accent,
+    }),
+    menuPortal: (styles: any) => ({
+      ...styles,
+      color: font,
+      zIndex: 10050,
+    }),
+    menu: (styles: any) => ({
+      ...styles,
+      background: bg,
+      backgroundColor: bg,
+      position: 'absolute',
+      marginBottom: '10px',
+      borderRadius: '8px',
+      border: `1px solid ${border}`,
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    }),
+    menuList: (styles: any) => ({
+      ...styles,
+      background: bg,
+      backgroundColor: bg,
       borderRadius: '4px',
-      background: '#373A40',
-    },
-  }),
-  option: (styles: any, { isFocused, isSelected }: any) => ({
-    ...styles,
-    borderRadius: '6px',
-    width: '97%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    backgroundColor: isSelected ? '#2C2E33' : isFocused ? '#25262b' : 'transparent',
-    color: '#C1C2C5',
-    cursor: 'pointer',
-    fontFamily: 'Nexa-Book, sans-serif',
-  }),
+      '&::-webkit-scrollbar': {
+        width: '4px',
+      },
+      '&::-webkit-scrollbar-track': {
+        background: scrollbarTrack,
+      },
+      '&::-webkit-scrollbar-thumb': {
+        borderRadius: '4px',
+        background: borderSoft,
+      },
+    }),
+    option: (styles: any, { isFocused, isSelected }: any) => ({
+      ...styles,
+      borderRadius: '6px',
+      width: '97%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      backgroundColor: isSelected ? border : isFocused ? surface : 'transparent',
+      color: font,
+      cursor: 'pointer',
+      fontFamily: 'Nexa-Book, sans-serif',
+    }),
+  };
 };
 
 const SelectTattoo = ({
@@ -203,10 +217,7 @@ const SelectTattoo = ({
   }
 
   const themeContext = useContext(ThemeContext);
-  // Override with theme colors - Thomas boilerplate dark
-  customStyles.control.backgroundColor = themeContext?.secondaryBackground ? `rgb(${themeContext.secondaryBackground})` : '#1A1B1E';
-  customStyles.menu.backgroundColor = themeContext?.secondaryBackground ? `rgb(${themeContext.secondaryBackground})` : '#1A1B1E';
-  customStyles.menuList.backgroundColor = themeContext?.secondaryBackground ? `rgb(${themeContext.secondaryBackground})` : '#1A1B1E';
+  const customStyles = buildCustomStyles(themeContext);
 
   return (
     <Container>

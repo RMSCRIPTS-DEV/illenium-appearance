@@ -48,7 +48,8 @@ const ColorButton = styled.button<ButtonProps>`
         : `rgba(${theme.borderColorSoft || '55, 58, 64'}, 1)`};
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: ${({ selected }) => selected ? '0 0 8px rgba(34, 139, 230, 0.4)' : 'none'};
+  box-shadow: ${({ selected, theme }) =>
+    selected ? `0 0 8px rgba(${theme.accentColor || '77, 171, 247'}, 0.4)` : 'none'};
 
   &:hover {
     border-color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`};

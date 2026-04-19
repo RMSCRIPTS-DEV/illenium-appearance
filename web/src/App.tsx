@@ -28,9 +28,13 @@ const defaultTheme: any = {
   borderColor: '44, 46, 51',             // #2C2E33
   borderColorSoft: '55, 58, 64',         // #373A40
 
-  // Accent color (Mantine light blue style)
-  accentColor: '202, 55, 25',           //rgb(202, 55, 25)
-  accentColorHover: '202, 55, 25',     //rgb(43, 168, 15)
+  // Accent color (monochrome black & white theme)
+  accentColor: '255, 255, 255',        // #FFFFFF
+  accentColorHover: '230, 230, 230',   // #E6E6E6
+  
+  // mantine blue theme if want just uncomment this and comment the above
+  // accentColor: '77, 171, 247',         // #4dabf7
+  // accentColorHover: '116, 192, 252',   // #74c0fc
 
   borderRadius: '4px',
   scaleOnHover: false,
@@ -59,17 +63,12 @@ const App: React.FC = () => {
     const themeData = await Nui.post('get_theme_configuration');
     const serverTheme = getCurrentTheme(themeData);
 
-    // Merge server theme over our local defaults so any *new* fields we add
-    // (like accentColor) still have safe values even if the server doesn't know them.
-    let nextTheme = serverTheme ? { ...defaultTheme, ...serverTheme } : defaultTheme;
-
-    // Force accent colors to come from App.tsx in both dev and production,
-    // so changing them here always wins over the server config.
-    nextTheme = {
-      ...nextTheme,
-      accentColor: defaultTheme.accentColor,
-      accentColorHover: defaultTheme.accentColorHover,
-    };
+    // Let the server theme fill in anything it cares about (e.g. id, fontFamily,
+    // borderRadius, smoothBackgroundTransition), but always let the local
+    // defaultTheme win for colors so any change made here applies in-game too.
+    const nextTheme = serverTheme
+      ? { ...serverTheme, ...defaultTheme }
+      : defaultTheme;
 
     setCurrentTheme(nextTheme);
   }, []);

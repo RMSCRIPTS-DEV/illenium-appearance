@@ -16,8 +16,8 @@ const CustomButton = styled.span<ButtonProps>`
   width: ${props => props?.width || "auto"};
   font-size: ${vp(12)};
   font-weight: 600;
-  color: #ffffff;
-  background-color: #4dabf7;
+  color: ${({ theme }) => `rgb(${theme.fontColorSelected || '0, 0, 0'})`};
+  background-color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`};
   border: none;
   text-align: center;
   border-radius: ${vp(4)};
@@ -30,7 +30,7 @@ const CustomButton = styled.span<ButtonProps>`
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: #74c0fc;
+    background-color: ${({ theme }) => `rgb(${theme.accentColorHover || '116, 192, 252'})`};
   }
   
   &:active {

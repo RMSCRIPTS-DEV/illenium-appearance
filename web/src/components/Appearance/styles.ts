@@ -260,8 +260,8 @@ export const SidebarItem = styled.button<SidebarItemProps>`
     active
       ? `1px solid rgb(${theme.accentColor || '77, 171, 247'})`
       : `1px solid rgba(${theme.borderColor || '44, 46, 51'}, 1)`};
-  box-shadow: ${({ active }) =>
-    active ? '0 0 0 1px rgba(34, 139, 230, 0.2)' : 'none'};
+  box-shadow: ${({ active, theme }) =>
+    active ? `0 0 0 1px rgba(${theme.accentColor || '77, 171, 247'}, 0.2)` : 'none'};
   
   svg {
     width: ${vp(18)};
@@ -396,7 +396,7 @@ export const NumberButton = styled.button`
     background: ${({ theme }) => `rgb(${theme.borderColorSoft || '55, 58, 64'})`};
     
     svg {
-      color: ${({ theme }) => 'rgb(166, 167, 171)'};
+      color: ${({ theme }) => `rgb(${theme.fontColor || '193, 194, 197'})`};
     }
   }
 `;
