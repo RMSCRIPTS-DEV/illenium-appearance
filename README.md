@@ -3,7 +3,7 @@
 A modern UI redesign of the popular illenium-appearance clothing system for FiveM.
 
 <div align='center'> 
-  <img src="https://i.imgur.com/HqMBPc2.png" alt="RM Scripts UI Redesign Preview" />
+  <img src="https://i.imgur.com/IwWvJNp.png" alt="RM Scripts UI Redesign Preview" />
 </div>
 
 ## 🎨 About This Project
