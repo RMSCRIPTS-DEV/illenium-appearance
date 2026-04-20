@@ -1,15 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
+import { useCallback, useRef } from 'react';
+import styled from 'styled-components';
 import { vp } from '../../../styles/scale';
-import { IconChevronLeft, IconChevronRight, IconLayoutGrid } from '@tabler/icons-react';
-import ThumbnailGrid from './ThumbnailGrid';
-import { ThumbKind, ThumbGender } from '../../../utils/thumbnails';
-
-interface ThumbnailRef {
-  kind: ThumbKind;
-  id: number;
-  gender: ThumbGender;
-}
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 
 interface InputProps {
   title?: string;
@@ -19,26 +11,7 @@ interface InputProps {
   defaultValue: number;
   clientValue: number;
   onChange: (value: number) => void;
-  thumbnail?: ThumbnailRef;
 }
-
-const GRID_MODE_KEY = 'illenium_grid_mode_v1';
-
-const readGridMode = (): boolean => {
-  try {
-    return localStorage.getItem(GRID_MODE_KEY) === '1';
-  } catch {
-    return false;
-  }
-};
-
-const writeGridMode = (on: boolean) => {
-  try {
-    localStorage.setItem(GRID_MODE_KEY, on ? '1' : '0');
-  } catch {
-    /* noop */
-  }
-};
 
 const Container = styled.div`
   width: 100%;
@@ -47,52 +20,10 @@ const Container = styled.div`
   gap: ${vp(10)};
 `;
 
-const LabelRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${vp(8)};
-`;
-
 const Label = styled.span`
   font-size: ${vp(11)};
   color: ${({ theme }) => `rgb(${theme.mutedTextColor || '144, 146, 150'})`};
   font-weight: 500;
-`;
-
-interface GridToggleProps {
-  active: boolean;
-}
-
-const GridToggle = styled.button<GridToggleProps>`
-  width: ${vp(22)};
-  height: ${vp(22)};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: ${vp(1)} solid ${({ theme }) => `rgba(${theme.borderColorSoft || '55, 58, 64'}, 1)`};
-  border-radius: ${vp(4)};
-  cursor: pointer;
-  transition: all 0.15s ease;
-
-  svg {
-    width: ${vp(12)};
-    height: ${vp(12)};
-    color: ${({ theme }) => `rgb(${theme.mutedTextColorSoft || '92, 95, 102'})`};
-    transition: color 0.15s ease;
-  }
-
-  &:hover {
-    border-color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`};
-    svg { color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`}; }
-  }
-
-  ${({ active, theme }) => active && css`
-    background: rgba(${theme.accentColor || '77, 171, 247'}, 0.15);
-    border-color: rgb(${theme.accentColor || '77, 171, 247'});
-    svg { color: rgb(${theme.accentColor || '77, 171, 247'}); }
-  `}
 `;
 
 const InputWrapper = styled.div`
@@ -173,25 +104,8 @@ const ValueInput = styled.input`
   -moz-appearance: textfield;
 `;
 
-const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = [], defaultValue, clientValue, onChange, thumbnail }) => {
+const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = [], defaultValue, clientValue, onChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [gridMode, setGridMode] = useState<boolean>(() => readGridMode());
-
-  useEffect(() => {
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === GRID_MODE_KEY) setGridMode(e.newValue === '1');
-    };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-
-  const toggleGridMode = useCallback(() => {
-    setGridMode(prev => {
-      const next = !prev;
-      writeGridMode(next);
-      return next;
-    });
-  }, []);
 
   const isBlacklisted = function (_value: number, blacklisted: number[]) {
     if (!blacklisted || blacklisted.length === 0) {
@@ -295,51 +209,23 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
   // Use the most current value for button clicks to avoid stale state issues
   const currentValue = defaultValue !== undefined ? defaultValue : clientValue;
 
-  const showGrid = !!thumbnail && gridMode;
-
   return (
     <Container>
-      {(labelText || thumbnail) && (
-        <LabelRow>
-          {labelText ? <Label>{labelText}</Label> : <span />}
-          {thumbnail && (
-            <GridToggle
-              type="button"
-              active={gridMode}
-              onClick={toggleGridMode}
-              title={gridMode ? 'Hide thumbnails' : 'Show thumbnails'}
-            >
-              <IconLayoutGrid stroke={2} />
-            </GridToggle>
-          )}
-        </LabelRow>
-      )}
+      {labelText && <Label>{labelText}</Label>}
       <InputWrapper>
         <Button type="button" onClick={() => handleChange(currentValue - 1, -1)}>
           <IconChevronLeft stroke={2} />
         </Button>
-        <ValueInput
-          type="number"
-          ref={inputRef}
-          value={defaultValue}
-          onChange={e => handleChange(e.target.value, 0)}
+        <ValueInput 
+          type="number" 
+          ref={inputRef} 
+          value={defaultValue} 
+          onChange={e => handleChange(e.target.value, 0)} 
         />
         <Button type="button" onClick={() => handleChange(currentValue + 1, 1)}>
           <IconChevronRight stroke={2} />
         </Button>
       </InputWrapper>
-      {showGrid && thumbnail && (
-        <ThumbnailGrid
-          kind={thumbnail.kind}
-          id={thumbnail.id}
-          gender={thumbnail.gender}
-          min={min}
-          max={max}
-          selected={defaultValue}
-          blacklisted={blacklisted}
-          onSelect={value => handleChange(value, 0)}
-        />
-      )}
     </Container>
   );
 };

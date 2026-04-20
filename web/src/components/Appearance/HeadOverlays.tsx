@@ -4,7 +4,6 @@ import Item from './components/Item';
 import Input from './components/Input';
 import ColorInput from './components/ColorInput';
 import RangeInput from './components/RangeInput';
-import { ThumbGender } from '../../utils/thumbnails';
 
 import {
   HairSettings,
@@ -47,7 +46,6 @@ interface HeadOverlaysProps {
   handleEyeColorChange: (value: number) => void;
   handleChangeFade: (value: number) => void;
   automaticFade: boolean;
-  gender: ThumbGender;
 }
 
 const HeadOverlays = ({
@@ -58,10 +56,9 @@ const HeadOverlays = ({
   isPedFreemodeModel,
   handleHairChange,
   handleHeadOverlayChange,
-  handleEyeColorChange,
+  handleEyeColorChange, 
   handleChangeFade,
-  automaticFade,
-  gender,
+  automaticFade
 }: HeadOverlaysProps) => {
   const { locales } = useNuiState();
 
@@ -92,7 +89,6 @@ const HeadOverlays = ({
           defaultValue={data.hair.style}
           clientValue={storedData.hair.style}
           onChange={value => handleHairChange('style', value)}
-          thumbnail={{ kind: 'component', id: 2, gender }}
         />
         <Input
           title={ho.hair.texture}
@@ -150,7 +146,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.eyebrows.style}
               clientValue={storedData.headOverlays.eyebrows.style}
               onChange={value => handleHeadOverlayChange('eyebrows', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 2, gender }}
             />
             <ColorInput
               title={ho.color}
@@ -186,7 +181,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.makeUp.style}
               clientValue={storedData.headOverlays.makeUp.style}
               onChange={value => handleHeadOverlayChange('makeUp', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 4, gender }}
             />
             <ColorInput
               title={ho.color}
@@ -219,7 +213,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.blush.style}
               clientValue={storedData.headOverlays.blush.style}
               onChange={value => handleHeadOverlayChange('blush', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 5, gender }}
             />
             <ColorInput
               title={ho.color}
@@ -245,7 +238,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.lipstick.style}
               clientValue={storedData.headOverlays.lipstick.style}
               onChange={value => handleHeadOverlayChange('lipstick', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 8, gender }}
             />
             <ColorInput
               title={ho.color}
@@ -274,7 +266,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.beard.style}
               clientValue={storedData.headOverlays.beard.style}
               onChange={value => handleHeadOverlayChange('beard', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 1, gender }}
             />
             <ColorInput
               title={ho.color}
@@ -303,7 +294,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.blemishes.style}
               clientValue={storedData.headOverlays.blemishes.style}
               onChange={value => handleHeadOverlayChange('blemishes', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 0, gender }}
             />
           </Item>
           <Item title={ho.ageing}>
@@ -322,7 +312,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.ageing.style}
               clientValue={storedData.headOverlays.ageing.style}
               onChange={value => handleHeadOverlayChange('ageing', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 3, gender }}
             />
           </Item>
           <Item title={ho.complexion}>
@@ -341,7 +330,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.complexion.style}
               clientValue={storedData.headOverlays.complexion.style}
               onChange={value => handleHeadOverlayChange('complexion', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 6, gender }}
             />
           </Item>
           <Item title={ho.sunDamage}>
@@ -360,7 +348,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.sunDamage.style}
               clientValue={storedData.headOverlays.sunDamage.style}
               onChange={value => handleHeadOverlayChange('sunDamage', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 7, gender }}
             />
           </Item>
           <Item title={ho.moleAndFreckles}>
@@ -379,7 +366,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.moleAndFreckles.style}
               clientValue={storedData.headOverlays.moleAndFreckles.style}
               onChange={value => handleHeadOverlayChange('moleAndFreckles', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 9, gender }}
             />
           </Item>
           <Item title={ho.bodyBlemishes}>
@@ -398,7 +384,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.bodyBlemishes.style}
               clientValue={storedData.headOverlays.bodyBlemishes.style}
               onChange={value => handleHeadOverlayChange('bodyBlemishes', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 11, gender }}
             />
           </Item>
         </>
@@ -420,7 +405,6 @@ const HeadOverlays = ({
               defaultValue={data.headOverlays.chestHair.style}
               clientValue={storedData.headOverlays.chestHair.style}
               onChange={value => handleHeadOverlayChange('chestHair', 'style', value)}
-              thumbnail={{ kind: 'overlay', id: 10, gender }}
             />
             <ColorInput
               title={ho.color}
