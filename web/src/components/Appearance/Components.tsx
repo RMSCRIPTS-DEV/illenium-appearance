@@ -3,6 +3,7 @@ import { useNuiState } from '../../hooks/nuiState';
 import Item from './components/Item';
 import { FlexWrapper } from './styles';
 import Input from './components/Input';
+import { ThumbGender } from '../../utils/thumbnails';
 
 import { ComponentConfig, ComponentSettings, PedComponent } from './interfaces';
 
@@ -15,6 +16,7 @@ interface ComponentsProps {
   componentConfig: ComponentConfig;
   hasTracker: boolean;
   isPedFreemodeModel: boolean | undefined;
+  gender: ThumbGender;
 }
 
 interface DataById<T> {
@@ -29,7 +31,8 @@ const Components = ({
   handleComponentTextureChange,
   componentConfig,
   hasTracker,
-  isPedFreemodeModel
+  isPedFreemodeModel,
+  gender,
 }: ComponentsProps) => {
   const { locales } = useNuiState();
 
@@ -63,6 +66,7 @@ const Components = ({
             defaultValue={componentsById[11].drawable}
             clientValue={storedComponentsById[11].drawable}
             onChange={value => handleComponentDrawableChange(11, value)}
+            thumbnail={{ kind: 'component', id: 11, gender }}
           />
           <Input
             title={l.texture}
@@ -85,6 +89,7 @@ const Components = ({
             defaultValue={componentsById[8].drawable}
             clientValue={storedComponentsById[8].drawable}
             onChange={value => handleComponentDrawableChange(8, value)}
+            thumbnail={{ kind: 'component', id: 8, gender }}
           />
           <Input
             title={l.texture}
@@ -107,6 +112,7 @@ const Components = ({
             defaultValue={componentsById[3].drawable}
             clientValue={storedComponentsById[3].drawable}
             onChange={value => handleComponentDrawableChange(3, value)}
+            thumbnail={{ kind: 'component', id: 3, gender }}
           />
           <Input
             title={l.texture}
@@ -129,6 +135,7 @@ const Components = ({
             defaultValue={componentsById[4].drawable}
             clientValue={storedComponentsById[4].drawable}
             onChange={value => handleComponentDrawableChange(4, value)}
+            thumbnail={{ kind: 'component', id: 4, gender }}
           />
           <Input
             title={l.texture}
@@ -151,6 +158,7 @@ const Components = ({
             defaultValue={componentsById[6].drawable}
             clientValue={storedComponentsById[6].drawable}
             onChange={value => handleComponentDrawableChange(6, value)}
+            thumbnail={{ kind: 'component', id: 6, gender }}
           />
           <Input
             title={l.texture}
@@ -173,6 +181,7 @@ const Components = ({
             defaultValue={componentsById[10].drawable}
             clientValue={storedComponentsById[10].drawable}
             onChange={value => handleComponentDrawableChange(10, value)}
+            thumbnail={{ kind: 'component', id: 10, gender }}
           />
           <Input
             title={l.texture}
@@ -195,6 +204,7 @@ const Components = ({
             defaultValue={componentsById[1].drawable}
             clientValue={storedComponentsById[1].drawable}
             onChange={value => handleComponentDrawableChange(1, value)}
+            thumbnail={{ kind: 'component', id: 1, gender }}
           />
           <Input
             title={l.texture}
@@ -217,6 +227,7 @@ const Components = ({
             defaultValue={componentsById[9].drawable}
             clientValue={storedComponentsById[9].drawable}
             onChange={value => handleComponentDrawableChange(9, value)}
+            thumbnail={{ kind: 'component', id: 9, gender }}
           />
           <Input
             title={l.texture}
@@ -239,6 +250,7 @@ const Components = ({
             defaultValue={componentsById[5].drawable}
             clientValue={storedComponentsById[5].drawable}
             onChange={value => handleComponentDrawableChange(5, value)}
+            thumbnail={{ kind: 'component', id: 5, gender }}
           />
           <Input
             title={l.texture}
@@ -261,6 +273,7 @@ const Components = ({
             defaultValue={componentsById[7].drawable}
             clientValue={storedComponentsById[7].drawable}
             onChange={value => handleComponentDrawableChange(7, value)}
+            thumbnail={{ kind: 'component', id: 7, gender }}
           />
           <Input
             title={l.texture}
@@ -283,6 +296,7 @@ const Components = ({
             defaultValue={componentsById[0].drawable}
             clientValue={storedComponentsById[0].drawable}
             onChange={value => handleComponentDrawableChange(0, value)}
+            thumbnail={{ kind: 'component', id: 0, gender }}
           />
           <Input
             title={l.texture}
