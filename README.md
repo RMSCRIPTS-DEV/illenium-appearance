@@ -27,38 +27,24 @@ Built upon the excellent work of:
 For installation and configuration, refer to the original documentation:  
 **[illenium-appearance Documentation](https://docs.illenium.dev/free-resources/illenium-appearance/installation/)**
 
-## 🖼️ Clothing Images (Optional Dependency)
+## 🖼️ Clothing Thumbnails (Optional Dependency)
 
-This redesigned UI can display real thumbnails for every clothing item, prop, and appearance overlay. To generate them, we recommend **[uz_AutoShot](https://github.com/uz-scripts/uz_AutoShot)** — a free all-in-one screenshot studio that produces transparent PNGs for clothing, props, vehicles, and objects.
+This UI can display inline image thumbnails inside every clothing, prop, and head-overlay picker. Images are served from **[uz_AutoShot](https://github.com/uz-scripts/uz_AutoShot)** as a runtime dependency — no commands are registered on our side.
 
-### Quick Setup
+### Setup
 
-1. **Download** [uz_AutoShot](https://github.com/uz-scripts/uz_AutoShot) and drop the folder into your `resources` directory. The folder must be named exactly `uz_AutoShot`.
-2. **Add to `server.cfg`** (make sure `screenshot-basic` starts first):
+1. Install **[uz_AutoShot](https://github.com/uz-scripts/uz_AutoShot)** by following its own README (the folder must be named exactly `uz_AutoShot`).
+2. Make sure `uz_AutoShot` starts **before** `illenium-appearance` in your `server.cfg`:
    ```
    ensure screenshot-basic
    ensure uz_AutoShot
    ensure illenium-appearance
    ```
-3. **Start the server.** Node dependencies install automatically on first boot (built-in `yarn` support required, artifacts 4892+).
-4. **Grant yourself permission** (or set `Customize.AceRestricted = false` inside `uz_AutoShot/Customize.lua`):
-   ```
-   add_ace identifier.license:YOUR_LICENSE command.shotmaker allow
-   add_ace identifier.license:YOUR_LICENSE command.wardrobe allow
-   ```
-5. **Generate the images** — in-game, run:
-   ```
-   /shotmaker
-   ```
-   Pick the **Clothing** and **Appearance Overlays** tabs, adjust the orbit camera if you want, and hit **Start**. It will automatically iterate every component/drawable/texture and save transparent PNGs into `uz_AutoShot/shots/`.
-6. **Restart both resources** so the new images are indexed and picked up by the UI:
-   ```
-   restart uz_AutoShot
-   restart illenium-appearance
-   ```
-7. Open the clothing menu — thumbnails should now appear next to every item. That's it.
+3. Capture the images using `uz_AutoShot`'s own commands (`/shotmaker`, `/wardrobe`, etc.) exactly as documented in its repo. Output lands in `uz_AutoShot/shots/<gender>/...`.
+4. `restart uz_AutoShot` so FiveM re-registers the new PNGs for NUI access.
+5. Open `illenium-appearance` and tap the small grid icon next to a **Drawable** label — tiles will appear. Toggle persists per-user in `localStorage`. If `uz_AutoShot` is not installed or the image is missing, tiles gracefully degrade to numeric placeholders.
 
-> Tip: Re-run `/shotmaker` any time you add new clothing packs, then restart both resources again.
+> Tip: Re-run `/shotmaker` whenever you add new clothing packs, then `restart uz_AutoShot`.
 
 ## 💬 Support & Community
 

@@ -923,6 +923,7 @@ const Appearance = () => {
             handleEyeColorChange={handleEyeColorChange}
             handleChangeFade={handleChangeFade}
             automaticFade={config.automaticFade}
+            gender={isPedMale ? 'male' : 'female'}
           />
         );
       case 'components':
@@ -936,6 +937,7 @@ const Appearance = () => {
             componentConfig={cfg.componentConfig}
             hasTracker={config.hasTracker}
             isPedFreemodeModel={isPedFreemodeModel}
+            gender={isPedMale ? 'male' : 'female'}
           />
         );
       case 'props':
@@ -947,6 +949,7 @@ const Appearance = () => {
             handlePropDrawableChange={handlePropDrawableChange}
             handlePropTextureChange={handlePropTextureChange}
             propConfig={cfg.propConfig}
+            gender={isPedMale ? 'male' : 'female'}
           />
         );
       case 'tattoos':

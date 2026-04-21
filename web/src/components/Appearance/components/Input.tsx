@@ -1,7 +1,9 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { vp } from '../../../styles/scale';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import { IconChevronLeft, IconChevronRight, IconLayoutGrid, IconListDetails } from '@tabler/icons-react';
+import ThumbnailGrid from './ThumbnailGrid';
+import { ThumbnailTarget } from '../../../utils/thumbnails';
 
 interface InputProps {
   title?: string;
@@ -11,7 +13,18 @@ interface InputProps {
   defaultValue: number;
   clientValue: number;
   onChange: (value: number) => void;
+  thumbnail?: ThumbnailTarget;
 }
+
+const GRID_MODE_STORAGE_KEY = 'illenium_grid_mode_v1';
+
+const readGridMode = (): boolean => {
+  try {
+    return window.localStorage.getItem(GRID_MODE_STORAGE_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
 
 const Container = styled.div`
   width: 100%;
@@ -20,10 +33,44 @@ const Container = styled.div`
   gap: ${vp(10)};
 `;
 
+const LabelRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${vp(8)};
+`;
+
 const Label = styled.span`
   font-size: ${vp(11)};
   color: ${({ theme }) => `rgb(${theme.mutedTextColor || '144, 146, 150'})`};
   font-weight: 500;
+`;
+
+const ToggleButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${vp(24)};
+  height: ${vp(24)};
+  background: transparent;
+  border: 1px solid ${({ theme }) => `rgba(${theme.borderColorSoft || '55, 58, 64'}, 1)`};
+  border-radius: ${vp(4)};
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  svg {
+    width: ${vp(12)};
+    height: ${vp(12)};
+    color: ${({ theme }) => `rgb(${theme.mutedTextColorSoft || '92, 95, 102'})`};
+    transition: color 0.15s ease;
+  }
+
+  &:hover {
+    border-color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`};
+    svg {
+      color: ${({ theme }) => `rgb(${theme.accentColor || '77, 171, 247'})`};
+    }
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -104,15 +151,37 @@ const ValueInput = styled.input`
   -moz-appearance: textfield;
 `;
 
-const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = [], defaultValue, clientValue, onChange }) => {
+const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = [], defaultValue, clientValue, onChange, thumbnail }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [gridMode, setGridMode] = useState<boolean>(() => readGridMode());
+
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === GRID_MODE_STORAGE_KEY) {
+        setGridMode(e.newValue === '1');
+      }
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  const toggleGridMode = () => {
+    setGridMode(prev => {
+      const next = !prev;
+      try {
+        window.localStorage.setItem(GRID_MODE_STORAGE_KEY, next ? '1' : '0');
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
 
   const isBlacklisted = function (_value: number, blacklisted: number[]) {
     if (!blacklisted || blacklisted.length === 0) {
       return false;
     }
     for (var i = 0; i < blacklisted.length; i++) {
-      // Use strict comparison and handle type coercion
       const blacklistValue = Number(blacklisted[i]);
       if (!isNaN(blacklistValue) && blacklistValue === _value) {
         return true;
@@ -132,45 +201,35 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
   }
 
   const checkBlacklisted = function (_value: number, blacklisted: number[], factor: number, currentValue: number, minVal: number, maxVal: number) {
-    // Normalize the input value first
     let targetValue = normalize(_value);
-    
-    // If no blacklist, just return the normalized value
+
     if (!blacklisted || blacklisted.length === 0) {
       return targetValue;
     }
-    
+
     if(factor === 0) {
-      // Direct input - check if value is blacklisted
       if(!isBlacklisted(targetValue, blacklisted)) {
         return targetValue;
       }
-      // If blacklisted, find nearest non-blacklisted value
       factor = targetValue > currentValue ? 1 : -1;
     }
 
-    // When factor is set (button click), check if target value is blacklisted
-    // If not blacklisted, return it. If blacklisted, find next non-blacklisted value.
     if (!isBlacklisted(targetValue, blacklisted)) {
       return targetValue;
     }
 
-    // Target value is blacklisted, find next non-blacklisted value
     let nextValue = targetValue;
     let attempts = 0;
-    const maxAttempts = maxVal - minVal + 1; // Prevent infinite loops
-    
-    // Skip blacklisted values in the direction we're moving
+    const maxAttempts = maxVal - minVal + 1;
+
     do {
       nextValue = normalize(nextValue + factor);
       attempts++;
-      // Safety check to prevent infinite loops
       if (attempts >= maxAttempts) {
-        // If we've tried everything, just return the target value (even if blacklisted)
         return targetValue;
       }
     } while (isBlacklisted(nextValue, blacklisted));
-    
+
     return nextValue;
   };
 
@@ -196,7 +255,6 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
         parsedValue = _value;
       }
 
-      // Use the current displayed value as the base for comparison
       const baseValue = defaultValue !== undefined ? defaultValue : clientValue;
       const safeValue = getSafeValue(parsedValue, factor, baseValue);
       onChange(safeValue);
@@ -206,12 +264,24 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
 
   const labelText = title ? `${title} (${max})` : undefined;
 
-  // Use the most current value for button clicks to avoid stale state issues
   const currentValue = defaultValue !== undefined ? defaultValue : clientValue;
 
   return (
     <Container>
-      {labelText && <Label>{labelText}</Label>}
+      {(labelText || thumbnail) && (
+        <LabelRow>
+          {labelText ? <Label>{labelText}</Label> : <span />}
+          {thumbnail && (
+            <ToggleButton
+              type="button"
+              title={gridMode ? 'Switch to arrows' : 'Switch to image grid'}
+              onClick={toggleGridMode}
+            >
+              {gridMode ? <IconListDetails stroke={2} /> : <IconLayoutGrid stroke={2} />}
+            </ToggleButton>
+          )}
+        </LabelRow>
+      )}
       <InputWrapper>
         <Button type="button" onClick={() => handleChange(currentValue - 1, -1)}>
           <IconChevronLeft stroke={2} />
@@ -226,6 +296,16 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
           <IconChevronRight stroke={2} />
         </Button>
       </InputWrapper>
+      {thumbnail && gridMode && (
+        <ThumbnailGrid
+          target={thumbnail}
+          min={min}
+          max={max}
+          selected={currentValue}
+          blacklisted={blacklisted}
+          onSelect={value => handleChange(value, 0)}
+        />
+      )}
     </Container>
   );
 };
