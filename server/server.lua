@@ -12,7 +12,6 @@ local function getMoneyForShop(shopType)
     elseif shopType == "surgeon" then
         money = Config.SurgeonCost
     end
-
     return money
 end
 
@@ -20,12 +19,23 @@ local function getOutfitsForPlayer(citizenid)
     outfitCache[citizenid] = {}
     local result = Database.PlayerOutfits.GetAllByCitizenID(citizenid)
     for i = 1, #result, 1 do
+        local components = result[i].components and json.decode(result[i].components)
+        local props = result[i].props and json.decode(result[i].props)
+        
+        if (not components or not props) and result[i].skin then
+            local legacyData = json.decode(result[i].skin)
+            if legacyData then
+                components = components or legacyData.components
+                props = props or legacyData.props
+            end
+        end
+
         outfitCache[citizenid][#outfitCache[citizenid] + 1] = {
             id = result[i].id,
             name = result[i].outfitname,
             model = result[i].model,
-            components = json.decode(result[i].components),
-            props = json.decode(result[i].props)
+            components = components or {},
+            props = props or {}
         }
     end
 end
@@ -39,15 +49,12 @@ local function GenerateUniqueCode()
     return code
 end
 
--- Callback(s)
-
 lib.callback.register("illenium-appearance:server:generateOutfitCode", function(_, outfitID)
     local existingOutfitCode = Database.PlayerOutfitCodes.GetByOutfitID(outfitID)
     if not existingOutfitCode then
         local code = GenerateUniqueCode()
         local id = Database.PlayerOutfitCodes.Add(outfitID, code)
         if not id then
-            print("Something went wrong while generating outfit code")
             return
         end
         return code
@@ -61,22 +68,16 @@ lib.callback.register("illenium-appearance:server:importOutfitCode", function(so
     if not existingOutfitCode then
         return nil
     end
-
     local playerOutfit = Database.PlayerOutfits.GetByID(existingOutfitCode.outfitid)
     if not playerOutfit then
         return
     end
-
-    if playerOutfit.citizenid == citizenID then return end -- Validation when someone tried to duplicate own outfit
-    if Database.PlayerOutfits.GetByOutfit(outfitName, citizenID) then return end -- Validation duplicate outfit name, if validate on local id, someone can "spam error" server-sided
-
+    if playerOutfit.citizenid == citizenID then return end
+    if Database.PlayerOutfits.GetByOutfit(outfitName, citizenID) then return end
     local id = Database.PlayerOutfits.Add(citizenID, outfitName, playerOutfit.model, playerOutfit.components, playerOutfit.props)
-
     if not id then
-        print("Something went wrong while importing the outfit")
         return
     end
-
     outfitCache[citizenID][#outfitCache[citizenID] + 1] = {
         id = id,
         name = outfitName,
@@ -84,7 +85,6 @@ lib.callback.register("illenium-appearance:server:importOutfitCode", function(so
         components = json.decode(playerOutfit.components),
         props = json.decode(playerOutfit.props)
     }
-
     return true
 end)
 
@@ -105,7 +105,6 @@ end)
 lib.callback.register("illenium-appearance:server:payForTattoo", function(source, tattoo)
     local src = source
     local cost = tattoo.cost or Config.TattooCost
-
     if Framework.RemoveMoney(src, "cash", cost) then
         lib.notify(src, {
             title = _L("purchase.tattoo.success.title"),
@@ -138,11 +137,9 @@ lib.callback.register("illenium-appearance:server:getManagementOutfits", functio
     if mType == "Gang" then
         job = Framework.GetGang(source)
     end
-
     local grade = tonumber(job.grade.level)
     local managementOutfits = {}
     local result = Database.ManagementOutfits.GetAllByJob(mType, job.name, gender)
-
     for i = 1, #result, 1 do
         if grade >= result[i].minrank then
             managementOutfits[#managementOutfits + 1] = {
@@ -251,10 +248,9 @@ RegisterNetEvent("illenium-appearance:server:saveManagementOutfit", function(out
     if not id then
         return
     end
-
     lib.notify(src, {
         title = _L("outfits.save.success.title"),
-            description = string.format(_L("outfits.save.success.description"), outfitData.Name),
+        description = string.format(_L("outfits.save.success.description"), outfitData.Name),
         type = "success",
         position = Config.NotifyOptions.position
     })
@@ -274,7 +270,6 @@ RegisterNetEvent("illenium-appearance:server:deleteOutfit", function(id)
     local citizenID = Framework.GetPlayerID(src)
     Database.PlayerOutfitCodes.DeleteByOutfitID(id)
     Database.PlayerOutfits.DeleteByID(id)
-
     for k, v in ipairs(outfitCache[citizenID]) do
         if v.id == id then
             table.remove(outfitCache[citizenID], k)
@@ -337,7 +332,6 @@ if Config.EnableJobOutfitsCommand then
     lib.addCommand("joboutfits", { help = _L("commands.joboutfits.title"), }, function(source)
         TriggerClientEvent("illenium-apearance:client:outfitsCommand", source, true)
     end)
-
     lib.addCommand("gangoutfits", { help = _L("commands.gangoutfits.title"), }, function(source)
         TriggerClientEvent("illenium-apearance:client:outfitsCommand", source)
     end)
